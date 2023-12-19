@@ -77,6 +77,7 @@ class En_Contraste_Plugin {
 		$this->load_dependencies();
 		$this->set_locale();
 		$this->define_admin_hooks();
+		$this->define_services_post_type_hooks();
 		$this->define_public_hooks();
 
 	}
@@ -110,6 +111,11 @@ class En_Contraste_Plugin {
 		 * of the plugin.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-en-contraste-plugin-i18n.php';
+
+		/**
+		 * The class responsible for adding services custom post type
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-post-types/class-en-contraste-plugin-services-post-type.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
@@ -156,6 +162,21 @@ class En_Contraste_Plugin {
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+
+	}
+
+	/**
+	 * Register all of the hooks related to services custom post type functionality
+	 * of the plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 */
+	private function define_services_post_type_hooks() {
+
+		$plugin_services_post_type = new En_Contraste_Plugin_Services_Post_Type();
+
+		$this->loader->add_action( 'init', $plugin_services_post_type, 'services_post_type', 0 );
 
 	}
 
