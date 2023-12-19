@@ -111,16 +111,21 @@ class En_Contraste_Plugin {
 		 * of the plugin.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-en-contraste-plugin-i18n.php';
-
+		
 		/**
-		 * The class responsible for adding services custom post type
+		 * The file responsible to add custom metaboxes
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-post-types/class-en-contraste-plugin-services-post-type.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/cmb2-functions.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-en-contraste-plugin-admin.php';
+
+		/**
+		 * The class responsible for adding services custom post type
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-post-types/class-en-contraste-plugin-services-post-type.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing

@@ -51,6 +51,9 @@ class En_Contraste_Plugin_Services_Post_Type {
             'items_list_navigation' => __( 'Services list navigation', 'en-contraste-plugin' ),
             'filter_items_list'     => __( 'Filter items list', 'en-contraste-plugin' ),
         );
+        $rewrite = array(
+            'slug'                  => 'servicios',
+        );
         $args = array(
             'label'                 => __( 'Service', 'en-contraste-plugin' ),
             'description'           => __( 'Post Type Description', 'en-contraste-plugin' ),
@@ -69,6 +72,7 @@ class En_Contraste_Plugin_Services_Post_Type {
             'exclude_from_search'   => false,
             'publicly_queryable'    => true,
             'capability_type'       => 'post',
+            'rewrite'               => $rewrite,
             'show_in_rest'          => true,
         );
         register_post_type( 'services', $args );
