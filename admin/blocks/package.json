@@ -15,6 +15,7 @@
     "packages-update": "wp-scripts packages-update",
     "plugin-zip": "wp-scripts plugin-zip",
     "start": "wp-scripts start",
+    "start:news": "wp-scripts start ./posts/src/index.js --output-path=./posts/build",
     "test:e2e": "wp-scripts test-e2e",
     "test:unit": "wp-scripts test-unit-js"
   },

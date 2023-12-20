@@ -141,6 +141,13 @@ class En_Contraste_Plugin_Admin {
 
 		}
 
+		register_block_type( 
+			plugin_dir_path( __FILE__ ) . 'blocks/posts',
+			array(
+				'render_callback' => array( $this, 'en_contraste_plugin_render_posts' ),
+			)
+		);
+
 	}
 
 	public function en_contraste_plugin_blocks_styles() {
@@ -151,6 +158,10 @@ class En_Contraste_Plugin_Admin {
 		wp_enqueue_style( 'slick', plugin_dir_url( __FILE__ ) . 'css/slick.css', array(), $this->version );
 		wp_enqueue_style( 'default', plugin_dir_url( __FILE__ ) . 'css/default.css', array(), $this->version );
 		wp_enqueue_style( 'style', plugin_dir_url( __FILE__ ) . 'css/style.css', array(), $this->version );
+	}
+
+	public function en_contraste_plugin_render_posts() {
+		return '<h1>esto es un bloque dinámico, parte frontend</h1>';
 	}
 
 }

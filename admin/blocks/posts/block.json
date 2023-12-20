@@ -1,0 +1,24 @@
+{
+    "apiVersion": 2,
+    "name": "en-contraste-plugin/news",
+    "title": "Posts recientes",
+    "category": "widgets",
+    "icon": "list-view",
+    "description": "Mostrar últimos posts",
+    "keywords": ["posts", "entradas", "noticias", "en contraste"],
+    "version": "1.0.0",
+    "textdomain": "en-contraste-plugin",
+    "attributes": {
+        "title": {
+            "type": "string",
+            "selector": "h2"
+        },
+        "category": {
+            "type": "string"
+        },
+        "per_page": {
+            "type": "integer"
+        }
+    },
+    "editorScript": "file:./build/index.js"
+}

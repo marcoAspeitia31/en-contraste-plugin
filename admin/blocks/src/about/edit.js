@@ -1,3 +1,12 @@
+/**
+ * The edit function describes the structure of your block in the context
+ * of the editor. This represents what the editor will render when the
+ * block is used.
+ * 
+ * @link https://developer.wordpress.org/block-editor/reference-guides/block-api/block-edit-save/
+ * @sice 1.0.0
+ */
+
 import { RichText, MediaUpload, URLInputButton, InspectorControls } from '@wordpress/block-editor'
 import { Button, Panel, PanelBody, PanelRow, TextControl } from '@wordpress/components'
 
