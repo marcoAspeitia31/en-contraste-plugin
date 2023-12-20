@@ -2,3 +2,29 @@
  * All of the CSS for your admin-specific functionality should be
  * included in this file.
  */
+body{
+    background: #f0f0f1;
+    color: #3c434a;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+    font-size: 13px;
+    line-height: 1.4em;
+    min-width: 600px;
+}
+
+.interface-navigable-region.interface-interface-skeleton__sidebar h1,
+.interface-navigable-region.interface-interface-skeleton__sidebar h2,
+.interface-navigable-region.interface-interface-skeleton__sidebar h3,
+.interface-navigable-region.interface-interface-skeleton__sidebar h4,
+.interface-navigable-region.interface-interface-skeleton__sidebar h5,
+.interface-navigable-region.interface-interface-skeleton__sidebar h6 {
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+}
+
+.interface-navigable-region.interface-interface-skeleton__sidebar ul {
+    margin: 0;
+}
+
+.interface-navigable-region.interface-interface-skeleton__sidebar button {
+    line-height: normal;
+}
+

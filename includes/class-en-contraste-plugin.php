@@ -173,6 +173,7 @@ class En_Contraste_Plugin {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 		$this->loader->add_action( 'init', $plugin_admin, 'en_contraste_plugin_register_blocks' );
+		$this->loader->add_action( 'enqueue_block_editor_assets', $plugin_admin, 'en_contraste_plugin_blocks_styles' );
 
 	}
 

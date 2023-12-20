@@ -83,6 +83,7 @@ class En_Contraste_Plugin_Admin {
 		 * class.
 		 */
 
+		 // Styles.
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/en-contraste-plugin-admin.css', array(), $this->version, 'all' );
 
 	}
@@ -140,6 +141,16 @@ class En_Contraste_Plugin_Admin {
 
 		}
 
+	}
+
+	public function en_contraste_plugin_blocks_styles() {
+		wp_enqueue_style( 'bootstrap', plugin_dir_url( __FILE__ ) . 'css/bootstrap.min.css', array(), '4.5.0' );
+		wp_enqueue_style( 'font-awesome', plugin_dir_url( __FILE__ ) . 'css/font-awesome.min.css', array(), '5.8.0' );
+		wp_enqueue_style( 'magnific-popup', plugin_dir_url( __FILE__ ) . 'css/magnific-popup.css', array(), $this->version );
+		wp_enqueue_style( 'animate', plugin_dir_url( __FILE__ ) . 'css/animate.min.css', array(), '3.7.2' );
+		wp_enqueue_style( 'slick', plugin_dir_url( __FILE__ ) . 'css/slick.css', array(), $this->version );
+		wp_enqueue_style( 'default', plugin_dir_url( __FILE__ ) . 'css/default.css', array(), $this->version );
+		wp_enqueue_style( 'style', plugin_dir_url( __FILE__ ) . 'css/style.css', array(), $this->version );
 	}
 
 }
