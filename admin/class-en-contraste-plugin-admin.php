@@ -40,6 +40,8 @@ class En_Contraste_Plugin_Admin {
 	 */
 	private $version;
 
+	private $blocks_assets;
+
 	/**
 	 * Initialize the class and set its properties.
 	 *
@@ -51,6 +53,14 @@ class En_Contraste_Plugin_Admin {
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
+
+		$this->blocks_assets = require_once plugin_dir_path( __FILE__ ) . 'blocks/build/index.asset.php';
+
+	}
+
+	public function get_blocks_assets() {
+
+		return $this->blocks_assets;
 
 	}
 
@@ -97,6 +107,38 @@ class En_Contraste_Plugin_Admin {
 		 */
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/en-contraste-plugin-admin.js', array( 'jquery' ), $this->version, false );
+
+		wp_register_script( 
+			$this->plugin_name . '-editor-blocks', 
+			plugin_dir_url( __FILE__ ) . 'blocks/build/index.js',
+			$this->get_blocks_assets()['dependencies'],
+			$this->get_blocks_assets()['version']
+		);
+
+	}
+
+	/**
+	 * Register the Gutenberg blocks for the admin area.
+	 *
+	 * @since    1.0.0
+	 * @link	 https://developer.wordpress.org/reference/functions/register_block_type/
+	 */
+	public function en_contraste_plugin_register_blocks() {
+
+		$blocks = array(
+			$this->plugin_name . '/about',
+		);
+
+		foreach ( $blocks as $block_type ) {
+
+			register_block_type( 
+				$block_type, 
+				array(
+					'editor_script' => $this->plugin_name . '-editor-blocks',
+				)
+			);
+
+		}
 
 	}
 
