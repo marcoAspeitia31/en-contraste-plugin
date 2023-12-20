@@ -45,9 +45,9 @@ const Edit = props => {
     content: newContent
   });
   const onSelectImage = newImage => {
-    if (newImage.sizes["services-grid"]) {
+    if (newImage.sizes.about) {
       setAttributes({
-        imageURL: newImage.sizes["services-grid"].url,
+        imageURL: newImage.sizes.about.url,
         imageAlt: newImage.alt
       });
     } else {
@@ -246,7 +246,7 @@ const Save = props => {
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("section", {
     className: "about-us-area pb-100"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "container p-0"
+    className: "container"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "row align-items-center"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {

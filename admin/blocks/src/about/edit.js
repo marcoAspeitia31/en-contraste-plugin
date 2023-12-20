@@ -20,9 +20,9 @@ const Edit = ( props ) => {
     const onChangeTitle = newTitle => setAttributes( { title: newTitle } )
     const onChangeContent = newContent => setAttributes( { content: newContent } )
     const onSelectImage = newImage => {
-        if ( newImage.sizes["services-grid"] ) {
+        if ( newImage.sizes.about ) {
             setAttributes({
-                imageURL: newImage.sizes["services-grid"].url,                
+                imageURL: newImage.sizes.about.url,                
                 imageAlt: newImage.alt
             })
         } else {
