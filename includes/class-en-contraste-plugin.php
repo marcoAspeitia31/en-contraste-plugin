@@ -77,7 +77,7 @@ class En_Contraste_Plugin {
 		$this->load_dependencies();
 		$this->set_locale();
 		$this->define_admin_hooks();
-		$this->define_services_post_type_hooks();
+		$this->define_services_hooks();
 		$this->define_public_hooks();
 
 	}
@@ -113,7 +113,7 @@ class En_Contraste_Plugin {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-en-contraste-plugin-i18n.php';
 		
 		/**
-		 * The file responsible to add custom metaboxes
+		 * The file responsible to add CMB2 functionality
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/cmb2-functions.php';
 
@@ -126,6 +126,11 @@ class En_Contraste_Plugin {
 		 * The class responsible for adding services custom post type
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-post-types/class-en-contraste-plugin-services-post-type.php';
+
+		/**
+		 * The classes responsible for adding custom metaboxes via CMB2
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-fields/class-en-contraste-plugin-services-fields.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
@@ -177,11 +182,15 @@ class En_Contraste_Plugin {
 	 * @since    1.0.0
 	 * @access   private
 	 */
-	private function define_services_post_type_hooks() {
+	private function define_services_hooks() {
 
 		$plugin_services_post_type = new En_Contraste_Plugin_Services_Post_Type();
 
 		$this->loader->add_action( 'init', $plugin_services_post_type, 'services_post_type', 0 );
+
+		$plugin_services_fields = new En_Contraste_Plugin_Services_Fields();
+
+		$this->loader->add_action( 'cmb2_init', $plugin_services_fields, 'services_image_metabox', 0 );
 
 	}
 
