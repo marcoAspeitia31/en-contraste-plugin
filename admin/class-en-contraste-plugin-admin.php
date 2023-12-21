@@ -164,4 +164,27 @@ class En_Contraste_Plugin_Admin {
 		return '<h1>esto es un bloque dinámico, parte frontend</h1>';
 	}
 
+	public function en_contraste_plugin_resgister_rest_fields() {
+
+		register_rest_field( 
+			array( 'post' ),
+			'featured_image_meta',
+			array(
+				'get_callback' => array( $this, 'en_contraste_plugin_get_featured_image_meta' )
+			)
+		);
+
+	}
+
+	public function en_contraste_plugin_get_featured_image_meta( $object ) {
+		
+		if ( $object['featured_media'] ) {
+
+			$field = wp_get_attachment_image_src( $object['featured_media'], array( 'blog-grid' ) );
+			return $field;
+		}
+		return false;
+
+	}
+
 }
