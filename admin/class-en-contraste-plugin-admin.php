@@ -160,28 +160,88 @@ class En_Contraste_Plugin_Admin {
 		wp_enqueue_style( 'style', plugin_dir_url( __FILE__ ) . 'css/style.css', array(), $this->version );
 	}
 
-	public function en_contraste_plugin_render_posts() {
-		return '<h1>esto es un bloque dinámico, parte frontend</h1>';
+	public function en_contraste_plugin_render_posts( $block_attributes, $block_content ) {
+
+		$block_title = isset( $block_attributes['title'] ) ? $block_attributes['title'] : 'Últimas noticias';
+		$block_content = isset( $block_attributes['content'] ) ? $block_attributes['content'] : 'Consulta nuestras últimas noticias';
+
+		$args = array(
+			'posts_per_page' => $block_attributes['per_page'],
+			'ignore_sticky_posts' => true
+		);
+		$posts = new WP_Query( $args );
+
+		$render = '';
+
+		if ( $posts->have_posts() ) {
+
+			$render .= '<section class="article-area">
+				<div class="container">
+					<div class="row justify-content-center">
+						<div class="col-lg-6 col-md-9">
+							<div class="section-title text-center">
+								<h2 class="title">'. esc_html( $block_title ) .'</h2>
+								<p>'. esc_html( $block_content ) .'</p>
+							</div>
+						</div>
+					</div>
+					<div class="row justify-content-center">';
+
+			while( $posts->have_posts() ){
+				
+				$posts->the_post();
+
+				$render .= '<div class="col-lg-4 col-md-6 col-sm-9">';
+					$render .= '<div class="article-item mt-30">';
+						$render .= '<div class="article-top text-center">';
+							$render .= '<a href="'. esc_attr( get_the_permalink() ) .'"><h4>' . esc_html( get_the_title() ) . '</h4></a>';
+						$render .= '</div>';
+						$render .= '<div class="article-thumb">';
+							$render .= '<a href="'. esc_attr( get_the_permalink() ) .'">'. wp_get_attachment_image( get_post_thumbnail_id(), 'blog-grid', false, array( 'class' => 'img-fluid' ) ) .'</a>';
+							$render .= '<div class="date">';
+								$render .= '<span class="title">'. esc_html( get_the_date( 'd' ) ) .'</span>';
+								$render .= '<span>'. esc_html( get_the_date( 'M' ) ) .'</span>';
+								$render .= '<span>'. esc_html( get_the_date( 'Y' ) ) .'</span>';
+							$render .= '</div>';
+						$render .= '</div>';
+						$render .='<div class="article-content pl-25 pr-25 pt-25">';
+							$render .= '<p>'. get_the_excerpt() .'</p>';
+							$render .= '<a href="'. esc_attr( get_the_permalink() ) .'">Leer más</a>';
+						$render .= '</div>';
+					$render .= '</div>';
+				$render .= '</div>';
+			}
+
+			$render .= '</div>';
+			$render .= '</div>';
+			$render .= '</section>';
+			
+		}
+
+		wp_reset_postdata();
+
+		return $render;
 	}
 
 	public function en_contraste_plugin_resgister_rest_fields() {
 
 		register_rest_field( 
 			array( 'post' ),
-			'featured_image_meta',
+			'featured_image_src',
 			array(
-				'get_callback' => array( $this, 'en_contraste_plugin_get_featured_image_meta' )
+				'get_callback' => array( $this, 'en_contraste_plugin_get_featured_image_src' )
 			)
 		);
 
 	}
 
-	public function en_contraste_plugin_get_featured_image_meta( $object ) {
+	public function en_contraste_plugin_get_featured_image_src( $object ) {
 		
 		if ( $object['featured_media'] ) {
 
-			$field = wp_get_attachment_image_src( $object['featured_media'], array( 'blog-grid' ) );
-			return $field;
+			$field = wp_get_attachment_image_src( $object['featured_media'], 'blog-grid' );
+			return $field[0];
+
 		}
 		return false;
 

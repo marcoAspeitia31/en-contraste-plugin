@@ -3,22 +3,28 @@
     "name": "en-contraste-plugin/news",
     "title": "Posts recientes",
     "category": "widgets",
-    "icon": "list-view",
-    "description": "Mostrar últimos posts",
+    "icon": "admin-post",
+    "description": "Lista los últimos posts del sitio web",
     "keywords": ["posts", "entradas", "noticias", "en contraste"],
     "version": "1.0.0",
     "textdomain": "en-contraste-plugin",
     "attributes": {
         "title": {
-            "type": "string",
-            "selector": "h2"
+            "type": "string"
         },
-        "category": {
+        "content": {
             "type": "string"
         },
         "per_page": {
             "type": "integer"
+        },
+        "align": {
+            "type": "string",
+            "default": "wide"
         }
+    },
+    "supports" : {
+        "align": ["wide"]
     },
     "editorScript": "file:./build/index.js"
 }

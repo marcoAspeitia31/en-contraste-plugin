@@ -18,6 +18,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__);
 
 /**
  * The edit function describes the structure of your block in the context
@@ -29,11 +33,18 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 
+
+
 const Edit = props => {
   const {
-    title,
-    per_page
+    attributes: {
+      title,
+      content,
+      per_page
+    },
+    setAttributes
   } = props;
+  const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.useBlockProps)();
 
   /**
    * useState Returns a stateful value, and a function to update it.
@@ -49,7 +60,12 @@ const Edit = props => {
    */
   const [posts, setPosts] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useState)([]);
   const fetchPosts = async () => {
-    const path = per_page === undefined ? 'wp/v2/posts?per_page=3' : `wp/v2/posts?per_page=${per_page}`;
+    if (per_page === undefined) {
+      setAttributes({
+        per_page: 3
+      });
+    }
+    const path = `wp/v2/posts?per_page=${per_page}`;
     const newPosts = await _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default()({
       path
     });
@@ -57,8 +73,38 @@ const Edit = props => {
   };
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useEffect)(() => {
     fetchPosts();
-  }, []);
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, posts.length > 0 && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("section", {
+  }, [per_page]);
+  const onChangePostsPerPage = newPerPage => {
+    setAttributes({
+      per_page: newPerPage
+    });
+  };
+  const onChangeTitle = newTitle => {
+    setAttributes({
+      title: newTitle
+    });
+  };
+  const onChangeContent = newContent => {
+    setAttributes({
+      content: newContent
+    });
+  };
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.InspectorControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Panel, {
+    header: "\xDAltimos posts"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelBody, {
+    title: "Cantidad de Posts a mostrar",
+    icon: "welcome-widgets-menus",
+    initialOpen: true
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.RangeControl, {
+    label: "N\xFAmero de posts",
+    value: per_page,
+    onChange: onChangePostsPerPage,
+    min: 1,
+    max: 10,
+    help: "Elige la cantidad de posts a mostrar"
+  }))))), posts.length > 0 && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    ...blockProps
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("section", {
     class: "article-area"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     class: "container"
@@ -68,14 +114,24 @@ const Edit = props => {
     class: "col-lg-6 col-md-9"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     class: "section-title text-center"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
-    src: "<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/hero-line.png",
-    alt: ""
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", {
-    class: "title"
-  }, "Recent Article"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Our focus is on delivering you the absolute best support guiding you through training and providing.")))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.RichText, {
+    tagName: "h2",
+    className: "title",
+    value: title,
+    onChange: onChangeTitle,
+    placeholder: "Agrega un t\xEDtulo"
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.RichText, {
+    tagName: "p",
+    value: content,
+    onChange: onChangeContent,
+    placeholder: "Agrega un descripci\xF3n"
+  })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     class: "row justify-content-center"
   }, posts.map(post => {
+    const timestampDate = moment(post.date);
+    const month = timestampDate.format('MMM');
+    const day = timestampDate.format('D');
+    const year = timestampDate.format('YYYY');
     const parser = new DOMParser();
     const excerpt = parser.parseFromString(post.excerpt.rendered, "text/html");
     let excerptRendered = excerpt.documentElement.textContent;
@@ -96,18 +152,18 @@ const Edit = props => {
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
       href: post.link
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
-      src: post.featured_image_meta[0],
+      src: post.featured_image_src,
       alt: ""
     })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       class: "date"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
       class: "title"
-    }, "25"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "JUN"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    }, day), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, month), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, year))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       class: "article-content pl-25 pr-25 pt-25"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, excerptRendered), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
       href: post.link
     }, "Leer m\xE1s"))));
-  })))));
+  }))))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Edit);
 
@@ -133,6 +189,16 @@ module.exports = window["wp"]["apiFetch"];
 
 /***/ }),
 
+/***/ "@wordpress/block-editor":
+/*!*************************************!*\
+  !*** external ["wp","blockEditor"] ***!
+  \*************************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["blockEditor"];
+
+/***/ }),
+
 /***/ "@wordpress/blocks":
 /*!********************************!*\
   !*** external ["wp","blocks"] ***!
@@ -140,6 +206,16 @@ module.exports = window["wp"]["apiFetch"];
 /***/ ((module) => {
 
 module.exports = window["wp"]["blocks"];
+
+/***/ }),
+
+/***/ "@wordpress/components":
+/*!************************************!*\
+  !*** external ["wp","components"] ***!
+  \************************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["components"];
 
 /***/ }),
 
@@ -159,7 +235,7 @@ module.exports = window["wp"]["element"];
   \**************************/
 /***/ ((module) => {
 
-module.exports = JSON.parse('{"apiVersion":2,"name":"en-contraste-plugin/news","title":"Posts recientes","category":"widgets","icon":"list-view","description":"Mostrar últimos posts","keywords":["posts","entradas","noticias","en contraste"],"version":"1.0.0","textdomain":"en-contraste-plugin","attributes":{"title":{"type":"string","selector":"h2"},"category":{"type":"string"},"per_page":{"type":"integer"}},"editorScript":"file:./build/index.js"}');
+module.exports = JSON.parse('{"apiVersion":2,"name":"en-contraste-plugin/news","title":"Posts recientes","category":"widgets","icon":"admin-post","description":"Lista los últimos posts del sitio web","keywords":["posts","entradas","noticias","en contraste"],"version":"1.0.0","textdomain":"en-contraste-plugin","attributes":{"title":{"type":"string"},"content":{"type":"string"},"per_page":{"type":"integer"},"align":{"type":"string","default":"wide"}},"supports":{"align":["wide"]},"editorScript":"file:./build/index.js"}');
 
 /***/ })
 
