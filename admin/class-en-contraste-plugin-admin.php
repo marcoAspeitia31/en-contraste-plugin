@@ -118,6 +118,16 @@ class En_Contraste_Plugin_Admin {
 
 	}
 
+	public function en_contraste_plugin_blocks_styles() {
+		wp_enqueue_style( 'bootstrap', plugin_dir_url( __FILE__ ) . 'css/bootstrap.min.css', array(), '4.5.0' );
+		wp_enqueue_style( 'font-awesome', plugin_dir_url( __FILE__ ) . 'css/font-awesome.min.css', array(), '5.8.0' );
+		wp_enqueue_style( 'magnific-popup', plugin_dir_url( __FILE__ ) . 'css/magnific-popup.css', array(), $this->version );
+		wp_enqueue_style( 'animate', plugin_dir_url( __FILE__ ) . 'css/animate.min.css', array(), '3.7.2' );
+		wp_enqueue_style( 'slick', plugin_dir_url( __FILE__ ) . 'css/slick.css', array(), $this->version );
+		wp_enqueue_style( 'default', plugin_dir_url( __FILE__ ) . 'css/default.css', array(), $this->version );
+		wp_enqueue_style( 'style', plugin_dir_url( __FILE__ ) . 'css/style.css', array(), $this->version );
+	}
+
 	/**
 	 * Register the Gutenberg blocks for the admin area.
 	 *
@@ -148,16 +158,13 @@ class En_Contraste_Plugin_Admin {
 			)
 		);
 
-	}
+		register_block_type( 
+			plugin_dir_path( __FILE__ ) . 'blocks/services',
+			array(
+				'render_callback' => array( $this, 'en_contraste_plugin_render_services' ),
+			)
+		);
 
-	public function en_contraste_plugin_blocks_styles() {
-		wp_enqueue_style( 'bootstrap', plugin_dir_url( __FILE__ ) . 'css/bootstrap.min.css', array(), '4.5.0' );
-		wp_enqueue_style( 'font-awesome', plugin_dir_url( __FILE__ ) . 'css/font-awesome.min.css', array(), '5.8.0' );
-		wp_enqueue_style( 'magnific-popup', plugin_dir_url( __FILE__ ) . 'css/magnific-popup.css', array(), $this->version );
-		wp_enqueue_style( 'animate', plugin_dir_url( __FILE__ ) . 'css/animate.min.css', array(), '3.7.2' );
-		wp_enqueue_style( 'slick', plugin_dir_url( __FILE__ ) . 'css/slick.css', array(), $this->version );
-		wp_enqueue_style( 'default', plugin_dir_url( __FILE__ ) . 'css/default.css', array(), $this->version );
-		wp_enqueue_style( 'style', plugin_dir_url( __FILE__ ) . 'css/style.css', array(), $this->version );
 	}
 
 	public function en_contraste_plugin_render_posts( $block_attributes, $block_content ) {
@@ -223,13 +230,70 @@ class En_Contraste_Plugin_Admin {
 		return $render;
 	}
 
+	public function en_contraste_plugin_render_services( $block_attributes, $block_content ) {
+
+		$block_title = isset( $block_attributes['title'] ) ? $block_attributes['title'] : 'Nuestros servicios';
+		$block_content = isset( $block_attributes['content'] ) ? $block_attributes['content'] : 'Adquiere la mejor experiencia en foto y video para tus eventos';
+
+		$args = array(
+			'posts_per_page' => $block_attributes['per_page'],
+			'post_type' => array( 'services' )
+		);
+		$services = new WP_Query( $args );
+
+		$render = '<section class="service-area pb-100">
+			<div class="container">
+				<div class="row justify-content-center">
+					<div class="col-lg-6 col-md-9">
+						<div class="section-title text-center">
+							<h3 class="title">'. esc_html( $block_title ) .'</h3>
+							<p>'. esc_html( $block_content ).'</p>
+						</div>
+					</div>
+				</div>
+				<div class="row justify-content-center">';
+
+					if ( $services->have_posts() ) {
+
+						/* Start the Loop */
+						while ( $services->have_posts() ) {
+							$services->the_post();
+
+							$render .= '<div class="col-lg-4 col-md-6 col-sm-8">';
+								$render .= '<div class="service-item-wrap mb-5">';
+									$render .= '<div class="service-meta text-center">';
+										$render .= '<a href="'. esc_html( get_the_permalink() ) .'"><h2 class="title">'. esc_html( get_the_title() ) .'</h2></a>';
+										$render .= '<a href="'. esc_html( get_the_permalink() ) .'" class="service-meta-link">Paquetes</a>';
+									$render .= '</div>';
+									$render .= wp_get_attachment_image( get_post_meta( get_the_ID(), 'services_image_image_id', true ), 'services-grid', false, array( 'class' => 'service-img-grid' ) );
+								$render .= '</div>';
+							$render .= '</div>';
+						}
+					}
+		$render .= '</div>
+			</div>
+		</section>';
+
+		wp_reset_postdata();
+
+		return $render;
+	}
+
 	public function en_contraste_plugin_resgister_rest_fields() {
 
 		register_rest_field( 
-			array( 'post' ),
+			array( 'post', 'services' ),
 			'featured_image_src',
 			array(
 				'get_callback' => array( $this, 'en_contraste_plugin_get_featured_image_src' )
+			)
+		);
+
+		register_rest_field( 
+			array( 'services' ),
+			'service_grid_image_src',
+			array(
+				'get_callback' => array( $this, 'en_contraste_plugin_get_service_grid_image_src' )
 			)
 		);
 
@@ -245,6 +309,17 @@ class En_Contraste_Plugin_Admin {
 		}
 		return false;
 
+	}
+
+	public function en_contraste_plugin_get_service_grid_image_src( $object ) {
+
+		if ( get_post_meta( $object['id'], 'services_image_image_id', true ) ) {
+
+			$field = wp_get_attachment_image_src( get_post_meta( $object['id'], 'services_image_image_id', true ), 'services-grid' );
+			return $field[0];
+
+		}		
+		return false;
 	}
 
 }

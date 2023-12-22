@@ -17,6 +17,8 @@
     "start": "wp-scripts start",
     "start:news": "wp-scripts start ./posts/src/index.js --output-path=./posts/build",
     "build:news": "wp-scripts build ./posts/src/index.js --output-path=./posts/build",
+    "start:services": "wp-scripts start ./services/src/index.js --output-path=./services/build",
+    "build:services": "wp-scripts build ./services/src/index.js --output-path=./services/build",
     "test:e2e": "wp-scripts test-e2e",
     "test:unit": "wp-scripts test-unit-js"
   },
