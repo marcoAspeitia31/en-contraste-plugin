@@ -1,0 +1,30 @@
+{
+    "apiVersion": 2,
+    "name": "en-contraste-plugin/services",
+    "title": "Servicios recientes",
+    "category": "widgets",
+    "icon": "admin-post",
+    "description": "Lista los últimos servicios del sitio web",
+    "keywords": ["servicios", "entradas", "noticias", "en contraste"],
+    "version": "1.0.0",
+    "textdomain": "en-contraste-plugin",
+    "attributes": {
+        "title": {
+            "type": "string"
+        },
+        "content": {
+            "type": "string"
+        },
+        "per_page": {
+            "type": "integer"
+        },
+        "align": {
+            "type": "string",
+            "default": "wide"
+        }
+    },
+    "supports" : {
+        "align": ["wide"]
+    },
+    "editorScript": "file:./build/index.js"
+}
