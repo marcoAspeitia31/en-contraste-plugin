@@ -78,6 +78,7 @@ class En_Contraste_Plugin {
 		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_services_hooks();
+		$this->define_front_page_hooks();
 		$this->define_public_hooks();
 
 	}
@@ -131,6 +132,7 @@ class En_Contraste_Plugin {
 		 * The classes responsible for adding custom metaboxes via CMB2
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-fields/class-en-contraste-plugin-services-fields.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-fields/class-en-contraste-plugin-front-page-fields.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
@@ -191,6 +193,21 @@ class En_Contraste_Plugin {
 		$plugin_services_fields = new En_Contraste_Plugin_Services_Fields();
 
 		$this->loader->add_action( 'cmb2_init', $plugin_services_fields, 'services_image_metabox', 0 );
+
+	}
+
+	/**
+	 * Register all of the hooks related to front_page custom post type functionality
+	 * of the plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 */
+	private function define_front_page_hooks() {
+
+		$plugin_front_page_fields = new En_Contraste_Plugin_Front_Page_Fields();
+
+		$this->loader->add_action( 'cmb2_init', $plugin_front_page_fields, 'front_page_portfolio_metabox', 0 );
 
 	}
 

@@ -17,27 +17,32 @@
  * @subpackage En_Contraste_Plugin/admin/custom-post-types
  * @author     DevITM <contacto@devitm.com>
  */
-class En_Contraste_Plugin_Services_Fields {
+class En_Contraste_Plugin_Front_Page_Fields {
 
-    function services_image_metabox() {
+    function front_page_portfolio_metabox() {
 
-        $prefix = 'services_image_';
+        $prefix = 'front_page_portfolio_';
+        $front_page_id = get_option( 'page_on_front' );
 
-        $services_image_metabox = new_cmb2_box( array(
+        $front_page_portfolio_metabox = new_cmb2_box( array(
             'id'            => $prefix . 'metabox',
-            'title'         => esc_html__( 'Imagen sección servicios', 'en-contraste-plugin' ),
-            'object_types'  => array( 'services' ),
+            'title'         => esc_html__( 'Portafolio', 'en-contraste-plugin' ),
+            'object_types'  => array( 'page' ), // Post type
             'context'    => 'normal',
             'priority'   => 'high',
             'show_names' => true,
+            'show_on'    => array(
+                'id' => array( $front_page_id ),
+            ),
             'show_in_rest' => WP_REST_Server::ALLMETHODS,
         ) );
 
-        $services_image_metabox->add_field( array(
-            'name' => esc_html__( 'Imagen principal', 'en-contraste-plugin' ),
+        $front_page_portfolio_metabox->add_field( array(
+            'name' => esc_html__( 'Galeria de imágenes del portafolio', 'en-contraste-plugin' ),
             'desc' => esc_html__( 'Tamaño recomendado 385 x 600 pixels.', 'en-contraste-plugin' ),
             'id'   => $prefix . 'image',
-            'type' => 'file',
+            'type' => 'file_list',
+		    'preview_size' => array( 385, 600 ), // Default: array( 50, 50 )
             'query_args' => array(
                 'type' => array(
                     'image/jpg',
