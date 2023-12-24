@@ -29,6 +29,8 @@
     "@wordpress/scripts": "^26.19.0"
   },
   "dependencies": {
+    "@wordpress/core-data": "^6.25.0",
+    "@wordpress/dom-ready": "^3.48.0",
     "moment": "^2.29.4"
   }
 }

@@ -106,7 +106,7 @@ const Edit = props => {
                             </div>
                             <div className="row justify-content-center">
                                 {
-                                    services.map( ( service ) => {
+                                    services.map( service => {
 
                                         const serviceGridImageSrc = service.service_grid_image_src === false ? service.cmb2.services_image_metabox.services_image_image : service.service_grid_image_src
                       
