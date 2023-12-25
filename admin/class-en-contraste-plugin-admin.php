@@ -165,6 +165,13 @@ class En_Contraste_Plugin_Admin {
 			)
 		);
 
+		register_block_type( 
+			plugin_dir_path( __FILE__ ) . 'blocks/portfolio',
+			array(
+				'render_callback' => array( $this, 'en_contraste_plugin_render_portfolio' ),
+			)
+		);
+
 	}
 
 	public function en_contraste_plugin_render_posts( $block_attributes, $block_content ) {
@@ -279,6 +286,66 @@ class En_Contraste_Plugin_Admin {
 		return $render;
 	}
 
+	public function en_contraste_plugin_render_portfolio( $block_attributes, $block_content) {
+
+		$args = array(
+			'page_id' => $block_attributes['pageOnFrontId']
+		);
+		$front_page = new WP_Query( $args );
+
+		$render = '<section class="portfolio-area pb-130">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-lg-6 col-md-9">
+					<div class="section-title text-center">
+						<h3 class="title">'.$block_attributes['title'].'</h3>
+						<p>'.$block_attributes['content'].'</p>
+					</div>
+				</div>
+			</div>
+		</div>';
+
+		if( $front_page->have_posts() ) {
+			while( $front_page->have_posts() ){
+				$front_page->the_post();
+
+				$front_page_portfolio_image = get_post_meta( get_the_ID(), 'front_page_portfolio_image', true );
+				$wrapperSliderClass = count($front_page_portfolio_image) > 3 ? 'row portfolio-active' : 'row justify-content-center';
+
+				$render .= '<div class="container-fluid p-0">';
+					$render .= '<div class="'.esc_html( $wrapperSliderClass ).'">';
+					
+			
+						if ( $front_page_portfolio_image && ! empty( $front_page_portfolio_image ) ) {
+							foreach ($front_page_portfolio_image as $key => $image_source) {
+
+								$render .= '<div class="col-lg-3">';
+									$render .= '<div class="portfolio-item mt-30">';
+										$render .= wp_get_attachment_image( $key, 'services-grid', false, array( 'class' => 'img-fluid' ) );
+										$render .= '<div class="portfolio-overlay">';
+											$render .= '<div class="content">';
+												$render .= '<h4 class="title">Real design inspiration</h4>';
+												$render .= '<p>Sitting proudly atop is the storey form bedroom phenomenally.</p>';
+											$render .= '</div>';
+										$render .= '</div>';
+									$render .= '</div>';
+								$render .= '</div>';
+
+							}
+						}
+
+                    $render .= '</div>';
+				$render .= '</div>';
+			}
+		}
+		wp_reset_postdata();
+
+		$render .= '</section>';
+
+		return $render;
+
+	}
+
 	public function en_contraste_plugin_resgister_rest_fields() {
 
 		register_rest_field( 
@@ -294,6 +361,14 @@ class En_Contraste_Plugin_Admin {
 			'service_grid_image_src',
 			array(
 				'get_callback' => array( $this, 'en_contraste_plugin_get_service_grid_image_src' )
+			)
+		);
+
+		register_rest_field( 
+			array( 'page' ),
+			'portfolio_images_src',
+			array(
+				'get_callback' => array( $this, 'en_contraste_plugin_get_portfolio_images_src' )
 			)
 		);
 
@@ -320,6 +395,28 @@ class En_Contraste_Plugin_Admin {
 
 		}		
 		return false;
+	}
+
+	public function en_contraste_plugin_get_portfolio_images_src( $object ) {
+
+		$front_page_portfolio_image = get_post_meta( $object['id'], 'front_page_portfolio_image', true );
+		
+		if ( $front_page_portfolio_image && ! empty( $front_page_portfolio_image ) ) {
+
+			$images = array();
+			foreach ($front_page_portfolio_image as $key => $image_source) {
+				$item = array(
+					$key => array(
+						'media' => wp_get_attachment_image_src( $key, 'services-grid', false )[0]
+					)
+				);
+				$images += $item ;
+			}
+
+			return $images;
+		}
+		return false;
+
 	}
 
 }

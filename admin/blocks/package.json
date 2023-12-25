@@ -19,6 +19,8 @@
     "build:news": "wp-scripts build ./posts/src/index.js --output-path=./posts/build",
     "start:services": "wp-scripts start ./services/src/index.js --output-path=./services/build",
     "build:services": "wp-scripts build ./services/src/index.js --output-path=./services/build",
+    "start:portfolio": "wp-scripts start ./portfolio/src/index.js --output-path=./portfolio/build",
+    "build:portfolio": "wp-scripts build ./portfolio/src/index.js --output-path=./portfolio/build",
     "test:e2e": "wp-scripts test-e2e",
     "test:unit": "wp-scripts test-unit-js"
   },
