@@ -288,8 +288,11 @@ class En_Contraste_Plugin_Admin {
 
 	public function en_contraste_plugin_render_portfolio( $block_attributes, $block_content) {
 
+		$title = isset( $block_attributes['title'] ) ? $block_attributes['title'] : 'Casos de éxito';
+		$content = isset( $block_attributes['content'] ) ? $block_attributes['content'] : 'Te presentamos nuestros casos de éxito recientes';
+
 		$args = array(
-			'page_id' => $block_attributes['pageOnFrontId']
+			'page_id' => get_option( 'page_on_front' )
 		);
 		$front_page = new WP_Query( $args );
 
@@ -298,8 +301,8 @@ class En_Contraste_Plugin_Admin {
 			<div class="row justify-content-center">
 				<div class="col-lg-6 col-md-9">
 					<div class="section-title text-center">
-						<h3 class="title">'.$block_attributes['title'].'</h3>
-						<p>'.$block_attributes['content'].'</p>
+						<h3 class="title">'.$title.'</h3>
+						<p>'.$content.'</p>
 					</div>
 				</div>
 			</div>

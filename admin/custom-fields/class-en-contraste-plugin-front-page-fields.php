@@ -42,7 +42,7 @@ class En_Contraste_Plugin_Front_Page_Fields {
             'desc' => esc_html__( 'Tamaño recomendado 385 x 600 pixels.', 'en-contraste-plugin' ),
             'id'   => $prefix . 'image',
             'type' => 'file_list',
-		    'preview_size' => array( 385, 600 ), // Default: array( 50, 50 )
+		    'preview_size' => array( 80, 80 ), // Default: array( 50, 50 )
             'query_args' => array(
                 'type' => array(
                     'image/jpg',
