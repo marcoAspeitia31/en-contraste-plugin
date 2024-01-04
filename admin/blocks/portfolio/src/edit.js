@@ -72,11 +72,11 @@ const Edit = props => {
         <>
         {
             Object.keys(portfolio).length > 0 &&
-            <section class="portfolio-area pb-130" { ...blockProps }>
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-6 col-md-9">
-                            <div class="section-title text-center">
+            <section className="portfolio-area pb-130" { ...blockProps }>
+                <div className="container">
+                    <div className="row justify-content-center">
+                        <div className="col-lg-6 col-md-9">
+                            <div className="section-title text-center">
                             <RichText
                                 tagName='h2'
                                 className='title'
@@ -94,21 +94,15 @@ const Edit = props => {
                         </div>
                     </div>
                 </div>
-                <div class="container-fluid p-0">
-                    <div class="row portfolio-active">
+                <div className="container-fluid p-0">
+                    <div className={ Object.values(portfolio).length >= 4 ? 'row portfolio-active' : 'row' }>
                         {
                             Object.values(portfolio).map( image => {
 
                                 return(
-                                    <div class="col-lg-3">
-                                        <div class="portfolio-item mt-30">
+                                    <div className="col-lg-3">
+                                        <div className="portfolio-item mt-30">
                                             <img src={image.media} alt=""/>
-                                            <div class="portfolio-overlay">
-                                                <div class="content">
-                                                    <h4 class="title">Real design inspiration</h4>
-                                                    <p>Sitting proudly atop is the storey form bedroom phenomenally.</p>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                 )                                

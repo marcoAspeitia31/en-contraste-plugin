@@ -107,7 +107,9 @@ class En_Contraste_Plugin_Admin {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/en-contraste-plugin-admin.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( 'jquery' );
+		wp_enqueue_script( 'slick', plugin_dir_url( __FILE__ ) . 'js/slick.min.js', array( 'jquery' ), $this->version, true );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/en-contraste-plugin-admin.js', array( 'jquery' ), $this->version, true );
 
 		wp_register_script( 
 			$this->plugin_name . '-editor-blocks', 
@@ -316,7 +318,7 @@ class En_Contraste_Plugin_Admin {
 				$wrapperSliderClass = count($front_page_portfolio_image) > 3 ? 'row portfolio-active' : 'row justify-content-center';
 
 				$render .= '<div class="container-fluid p-0">';
-					$render .= '<div class="'.esc_html( $wrapperSliderClass ).'">';
+					$render .= '<div id="mydiv" class="'.esc_html( $wrapperSliderClass ).'">';
 					
 			
 						if ( $front_page_portfolio_image && ! empty( $front_page_portfolio_image ) ) {
@@ -325,12 +327,6 @@ class En_Contraste_Plugin_Admin {
 								$render .= '<div class="col-lg-3">';
 									$render .= '<div class="portfolio-item mt-30">';
 										$render .= wp_get_attachment_image( $key, 'services-grid', false, array( 'class' => 'img-fluid' ) );
-										$render .= '<div class="portfolio-overlay">';
-											$render .= '<div class="content">';
-												$render .= '<h4 class="title">Real design inspiration</h4>';
-												$render .= '<p>Sitting proudly atop is the storey form bedroom phenomenally.</p>';
-											$render .= '</div>';
-										$render .= '</div>';
 									$render .= '</div>';
 								$render .= '</div>';
 
