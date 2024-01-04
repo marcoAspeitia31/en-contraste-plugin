@@ -14,7 +14,7 @@ const Save = ( props ) => {
         }
     } = props
     return(
-        <section className="about-us-area pb-100">
+        <section className="about-us-area pb-100 pt-100">
             <div className="container">
                 <div className="row align-items-center">
                     <div className="col-lg-5">

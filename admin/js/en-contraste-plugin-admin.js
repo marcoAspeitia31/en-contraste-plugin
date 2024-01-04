@@ -29,14 +29,64 @@
 	 * practising this, we should strive to set a better example in our own work.
 	 */
 
-	function portfolioSlider() {
+	/*===============================  
+		PORTFOLIO ACTIVE SLICK JS
+	================================*/
+	const portfolioSlider = () => {
 
-		$('.portfolio-active').slick();
-
-		console.log($('.portfolio-active').length)
+		$('.portfolio-active').slick({
+			arrows: true,
+			prevArrow: '<span class="prev"><i class="fal fa-angle-left"></i></span>',
+			nextArrow: '<span class="next"><i class="fal fa-angle-right"></i></span>',
+			dots: true,
+			infinite: true,
+			slidesToShow: 3,
+			slidesToScroll: 1,
+			autoplay: true,
+			centerMode: true,
+			centerPadding: "370px",
+			autoplaySpeed: 3000,
+			responsive: [
+				{
+					breakpoint: 1600,
+					settings: {
+						slidesToShow: 3,
+						centerPadding: "80px",
+					}
+				}, {
+						breakpoint: 1200,
+						settings: {
+							slidesToShow: 3,
+							centerPadding: "0px",
+						}
+				},
+					{
+						breakpoint: 992,
+						settings: {
+							slidesToShow: 3,
+							centerPadding: "0px",
+						}
+				},
+					{
+						breakpoint: 768,
+						settings: {
+							slidesToShow: 1,
+							centerPadding: "140px",
+							arrows: false,
+						}
+				},
+					{
+						breakpoint: 576,
+						settings: {
+							slidesToShow: 1,
+							centerPadding: "0px",
+							arrows: false,
+						}
+				}
+			]
+		});
 
 	}
-
 
 	$(document).on('ready', () => {
 		
@@ -45,61 +95,8 @@
 
 	$(window).on('load', (event) => {
 
-		setTimeout(function() { 
-			/*===============================  
-             PORTFOLIO ACTIVE SLICK JS
-			================================*/
-			$('.portfolio-active').slick({
-            arrows: true,
-            prevArrow: '<span class="prev"><i class="fal fa-angle-left"></i></span>',
-            nextArrow: '<span class="next"><i class="fal fa-angle-right"></i></span>',
-            dots: true,
-            infinite: true,
-            slidesToShow: 3,
-            slidesToScroll: 1,
-            autoplay: true,
-            centerMode: true,
-            centerPadding: "370px",
-            autoplaySpeed: 3000,
-            responsive: [
-                {
-                    breakpoint: 1600,
-                    settings: {
-                        slidesToShow: 3,
-                        centerPadding: "80px",
-                    }
-            }, {
-                    breakpoint: 1200,
-                    settings: {
-                        slidesToShow: 3,
-                        centerPadding: "0px",
-                    }
-            },
-                {
-                    breakpoint: 992,
-                    settings: {
-                        slidesToShow: 3,
-                        centerPadding: "0px",
-                    }
-            },
-                {
-                    breakpoint: 768,
-                    settings: {
-                        slidesToShow: 1,
-                        centerPadding: "140px",
-                        arrows: false,
-                    }
-            },
-                {
-                    breakpoint: 576,
-                    settings: {
-                        slidesToShow: 1,
-                        centerPadding: "0px",
-                        arrows: false,
-                    }
-            }
-        ]
-        });
+		setTimeout(function() {
+			portfolioSlider()			
 		}, 1500);
 
     });
