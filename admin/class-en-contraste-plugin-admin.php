@@ -404,11 +404,10 @@ class En_Contraste_Plugin_Admin {
 									</g>
 									</svg>
 								</div>
-								<?php the_content(); ?>
+								<?php echo esc_html( get_post_meta( get_the_ID(), 'testimonials_opinion', true ) ); ?>
 								<div class="info">
-									<?php the_post_thumbnail( 'testimonial', array( 'class' => 'img-fluid rounded-circle' ) ); ?>
+									<?php echo wp_get_attachment_image( get_post_meta( get_the_ID(), 'testimonials_image_id', true ), 'testimonial', false, array( 'class' => 'img-fluid rounded-circle' ) ); ?>
 									<h5 class="title"><?php esc_html( the_title() ); ?></h5>
-									<span>Sr. Product designer</span>
 								</div>
 							</div>
 						</div>
@@ -450,6 +449,14 @@ class En_Contraste_Plugin_Admin {
 			'portfolio_images_src',
 			array(
 				'get_callback' => array( $this, 'en_contraste_plugin_get_portfolio_images_src' )
+			)
+		);
+
+		register_rest_field( 
+			array( 'testimonials' ),
+			'featured_image_src',
+			array(
+				'get_callback' => array( $this, 'en_contraste_plugin_get_testimonial_featured_image_src' )
 			)
 		);
 
@@ -498,6 +505,16 @@ class En_Contraste_Plugin_Admin {
 		}
 		return false;
 
+	}
+
+	public function en_contraste_plugin_get_testimonial_featured_image_src( $object ) {
+
+		$testimonial_image_id = get_post_meta( $object['id'], 'testimonials_image_id', true );
+
+		if( $testimonial_image_id ) {
+			return wp_get_attachment_image_src( $testimonial_image_id, 'testimonial', false )[0];
+		}
+		return false;
 	}
 
 }

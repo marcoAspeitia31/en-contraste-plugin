@@ -104,12 +104,9 @@ const Edit = props => {
                         </div>
                         {
                             testimonials.length > 0 &&
-                            <div className={testimonials.length >= 3 ? 'row testimonial-active' : 'row' }>
+                            <div className={ testimonials.length >= 3 ? 'row testimonial-active' : 'row' }>
                                 {
                                     testimonials.map( testimonial => {
-                                        const parser = new DOMParser()
-                                        const content = parser.parseFromString( testimonial.content.rendered, "text/html" )
-                                        const contentRendered = content.documentElement.textContent
                                         return(
                                             <div className="col-lg-4">
                                                 <div className="testimonial-item mt-30">
@@ -120,10 +117,10 @@ const Edit = props => {
                                                         </g>
                                                         </svg>
                                                     </div>
-                                                    <p>{ contentRendered }</p>
+                                                    <p>{ testimonial.cmb2.testimonials_metabox.testimonials_opinion }</p>
                                                     <div className="info">
+                                                        <img src={ testimonial.featured_image_src } alt="imagen cliente en contraste fotografía" className="img-fluid rounded-circle" width="60" height="60"/>
                                                         <h5 className="title">{ testimonial.title.rendered }</h5>
-                                                        <span>Sr. Product designer</span>
                                                     </div>
                                                 </div>
                                             </div>

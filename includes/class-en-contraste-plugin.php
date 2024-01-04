@@ -134,6 +134,7 @@ class En_Contraste_Plugin {
 		 * The classes responsible for adding custom metaboxes via CMB2
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-fields/class-en-contraste-plugin-services-fields.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-fields/class-en-contraste-plugin-testimonials-fields.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-fields/class-en-contraste-plugin-front-page-fields.php';
 
 		/**
@@ -213,6 +214,10 @@ class En_Contraste_Plugin {
 		$plugin_testimonials_post_type = new En_Contraste_Plugin_Testimonials_Post_Type();
 
 		$this->loader->add_action( 'init', $plugin_testimonials_post_type, 'testimonials_post_type', 0 );
+
+		$plugin_testimonials_fields = new En_Contraste_Plugin_Testimonials_Fields();
+
+		$this->loader->add_action( 'cmb2_init', $plugin_testimonials_fields, 'testimonials_metabox', 0 );
 
 	}
 

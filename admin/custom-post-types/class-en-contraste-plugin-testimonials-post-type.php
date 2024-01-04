@@ -58,7 +58,7 @@ class En_Contraste_Plugin_Testimonials_Post_Type {
             'label'                 => __( 'Testimonial', 'en-contraste-plugin' ),
             'description'           => __( 'Post Type Description', 'en-contraste-plugin' ),
             'labels'                => $labels,
-            'supports'              => array( 'title', 'editor', 'thumbnail' ),
+            'supports'              => array( 'title' ),
             'hierarchical'          => false,
             'public'                => true,
             'show_ui'               => true,
