@@ -21,6 +21,8 @@
     "build:services": "wp-scripts build ./services/src/index.js --output-path=./services/build",
     "start:portfolio": "wp-scripts start ./portfolio/src/index.js --output-path=./portfolio/build",
     "build:portfolio": "wp-scripts build ./portfolio/src/index.js --output-path=./portfolio/build",
+    "start:testimonials": "wp-scripts start ./testimonials/src/index.js --output-path=./testimonials/build",
+    "build:testimonials": "wp-scripts build ./testimonials/src/index.js --output-path=./testimonials/build",
     "test:e2e": "wp-scripts test-e2e",
     "test:unit": "wp-scripts test-unit-js"
   },

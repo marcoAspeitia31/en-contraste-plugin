@@ -174,6 +174,13 @@ class En_Contraste_Plugin_Admin {
 			)
 		);
 
+		register_block_type( 
+			plugin_dir_path( __FILE__ ) . 'blocks/testimonials',
+			array(
+				'render_callback' => array( $this, 'en_contraste_plugin_render_testimonials' ),
+			)
+		);
+
 	}
 
 	public function en_contraste_plugin_render_posts( $block_attributes, $block_content ) {
@@ -290,6 +297,8 @@ class En_Contraste_Plugin_Admin {
 
 	public function en_contraste_plugin_render_portfolio( $block_attributes, $block_content) {
 
+		ob_start();
+
 		$title = isset( $block_attributes['title'] ) ? $block_attributes['title'] : 'Casos de éxito';
 		$content = isset( $block_attributes['content'] ) ? $block_attributes['content'] : 'Te presentamos nuestros casos de éxito recientes';
 
@@ -298,50 +307,123 @@ class En_Contraste_Plugin_Admin {
 		);
 		$front_page = new WP_Query( $args );
 
-		$render = '<section class="portfolio-area pb-130">
-		<div class="container">
-			<div class="row justify-content-center">
-				<div class="col-lg-6 col-md-9">
-					<div class="section-title text-center">
-						<h3 class="title">'.$title.'</h3>
-						<p>'.$content.'</p>
+		?>
+
+		<section class="portfolio-area pb-130">
+			<div class="container">
+				<div class="row justify-content-center">
+					<div class="col-lg-6 col-md-9">
+						<div class="section-title text-center">
+							<h3 class="title"><?php echo esc_html( $title ); ?></h3>
+							<p><?php echo esc_html( $content ); ?></p>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>';
+			<?php
+			if( $front_page->have_posts() ) :
 
-		if( $front_page->have_posts() ) {
-			while( $front_page->have_posts() ){
-				$front_page->the_post();
+				while( $front_page->have_posts() ) :
+					$front_page->the_post();
 
-				$front_page_portfolio_image = get_post_meta( get_the_ID(), 'front_page_portfolio_image', true );
-				$wrapperSliderClass = count($front_page_portfolio_image) > 3 ? 'row portfolio-active' : 'row justify-content-center';
+					$front_page_portfolio_image = get_post_meta( get_the_ID(), 'front_page_portfolio_image', true );
+					$wrapperSliderClass = count($front_page_portfolio_image) > 3 ? 'row portfolio-active' : 'row justify-content-center';
 
-				$render .= '<div class="container-fluid p-0">';
-					$render .= '<div id="mydiv" class="'.esc_html( $wrapperSliderClass ).'">';
-					
-			
-						if ( $front_page_portfolio_image && ! empty( $front_page_portfolio_image ) ) {
-							foreach ($front_page_portfolio_image as $key => $image_source) {
+					?>
+					<div class="container-fluid p-0">
+						<div id="mydiv" class="<?php echo esc_html( $wrapperSliderClass ); ?>">
+							<?php
+							if ( $front_page_portfolio_image && ! empty( $front_page_portfolio_image ) ) :
 
-								$render .= '<div class="col-lg-3">';
-									$render .= '<div class="portfolio-item mt-30">';
-										$render .= wp_get_attachment_image( $key, 'services-grid', false, array( 'class' => 'img-fluid' ) );
-									$render .= '</div>';
-								$render .= '</div>';
+								foreach ($front_page_portfolio_image as $key => $image_source) :
+									?>
+									<div class="col-lg-3">
+										<div class="portfolio-item mt-30">
+											<?php echo wp_get_attachment_image( $key, 'services-grid', false, array( 'class' => 'img-fluid' ) ); ?>
+										</div>
+									</div>
+									<?php
+								endforeach;
+								
+							endif;
+							?>
+						</div>
+					</div>
+					<?php
+				endwhile;
 
-							}
-						}
+			endif;
+			wp_reset_postdata();
+			?>
 
-                    $render .= '</div>';
-				$render .= '</div>';
-			}
-		}
-		wp_reset_postdata();
+		</section>
 
-		$render .= '</section>';
+		<?php
+		return ob_get_clean();
 
-		return $render;
+	}
+
+	public function en_contraste_plugin_render_testimonials( $block_attributes, $block_content ) {
+
+		ob_start();
+
+		$title = isset( $block_attributes['title'] ) ? $block_attributes['title'] : 'Testimonios';
+		$content = isset( $block_attributes['content'] ) ? $block_attributes['content'] : 'Así opinan de nosotros';
+
+		$args = array(
+			'post_type' => array( 'testimonials' ),
+			'posts_per_page' => $block_attributes['per_page']
+		);
+		$testimonials = new WP_Query( $args );
+
+		?>
+		<section class="testimonial-area">
+			<div class="container">
+				<div class="row justify-content-center">
+					<div class="col-lg-6 col-md-9">
+						<div class="section-title section-title-2 text-center">
+							<h3 class="title"><?php echo esc_html( $title ); ?></h3>
+							<p><?php echo esc_html( $content ); ?></p>
+						</div>
+					</div>
+				</div>
+				<?php
+				if( $testimonials->have_posts() ) :
+					?>
+					<div class="<?php echo $block_attributes['per_page'] >= 3 ? 'row testimonial-active' : 'row'; ?>">
+					<?php
+					while( $testimonials->have_posts() ):
+						$testimonials->the_post();
+						?>
+						<div class="col-lg-4">
+							<div class="testimonial-item mt-30">
+								<div class="quote">
+									<svg xmlns="http://www.w3.org/2000/svg" width="53.729" height="40" viewBox="0 0 53.729 40">
+									<g data-name="Group 21" transform="translate(0 0)">
+										<path data-name="Union 1" d="M47.055,40a1.21,1.21,0,0,1-1.018-.509L31.106,19.357A12.178,12.178,0,0,1,29.07,11.1,12.364,12.364,0,1,1,45.98,23.881l6.957,14.253A1.313,1.313,0,0,1,51.806,40ZM18.1,40a1.209,1.209,0,0,1-1.018-.509L2.149,19.357A12.77,12.77,0,0,1,.056,11.043,12.395,12.395,0,1,1,17.023,23.881L23.98,38.134A1.313,1.313,0,0,1,22.849,40Z" transform="translate(0 0)"/>
+									</g>
+									</svg>
+								</div>
+								<?php the_content(); ?>
+								<div class="info">
+									<?php the_post_thumbnail( 'testimonial', array( 'class' => 'img-fluid rounded-circle' ) ); ?>
+									<h5 class="title"><?php esc_html( the_title() ); ?></h5>
+									<span>Sr. Product designer</span>
+								</div>
+							</div>
+						</div>
+						<?php
+					endwhile;
+					?>
+					</div>
+					<?php
+				endif;
+				wp_reset_postdata();
+				?>
+			</div>
+		</section>
+		<?php
+		return ob_get_clean();
 
 	}
 
