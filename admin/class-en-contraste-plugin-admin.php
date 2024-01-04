@@ -185,6 +185,8 @@ class En_Contraste_Plugin_Admin {
 
 	public function en_contraste_plugin_render_posts( $block_attributes, $block_content ) {
 
+		ob_start();
+
 		$block_title = isset( $block_attributes['title'] ) ? $block_attributes['title'] : 'Últimas noticias';
 		$block_content = isset( $block_attributes['content'] ) ? $block_attributes['content'] : 'Consulta nuestras últimas noticias';
 
@@ -194,59 +196,59 @@ class En_Contraste_Plugin_Admin {
 		);
 		$posts = new WP_Query( $args );
 
-		$render = '';
-
-		if ( $posts->have_posts() ) {
-
-			$render .= '<section class="article-area">
+		if ( $posts->have_posts() ) :
+			?>
+			<section class="article-area">
 				<div class="container">
 					<div class="row justify-content-center">
 						<div class="col-lg-6 col-md-9">
 							<div class="section-title text-center">
-								<h2 class="title">'. esc_html( $block_title ) .'</h2>
-								<p>'. esc_html( $block_content ) .'</p>
+								<h2 class="title"><?php echo esc_html( $block_title ); ?></h2>
+								<p><?php echo esc_html( $block_content ); ?></p>
 							</div>
 						</div>
 					</div>
-					<div class="row justify-content-center">';
-
-			while( $posts->have_posts() ){
-				
-				$posts->the_post();
-
-				$render .= '<div class="col-lg-4 col-md-6 col-sm-9">';
-					$render .= '<div class="article-item mt-30">';
-						$render .= '<div class="article-top text-center">';
-							$render .= '<a href="'. esc_attr( get_the_permalink() ) .'"><h4>' . esc_html( get_the_title() ) . '</h4></a>';
-						$render .= '</div>';
-						$render .= '<div class="article-thumb">';
-							$render .= '<a href="'. esc_attr( get_the_permalink() ) .'">'. wp_get_attachment_image( get_post_thumbnail_id(), 'blog-grid', false, array( 'class' => 'img-fluid' ) ) .'</a>';
-							$render .= '<div class="date">';
-								$render .= '<span class="title">'. esc_html( get_the_date( 'd' ) ) .'</span>';
-								$render .= '<span>'. esc_html( get_the_date( 'M' ) ) .'</span>';
-								$render .= '<span>'. esc_html( get_the_date( 'Y' ) ) .'</span>';
-							$render .= '</div>';
-						$render .= '</div>';
-						$render .='<div class="article-content pl-25 pr-25 pt-25">';
-							$render .= '<p>'. get_the_excerpt() .'</p>';
-							$render .= '<a href="'. esc_attr( get_the_permalink() ) .'">Leer más</a>';
-						$render .= '</div>';
-					$render .= '</div>';
-				$render .= '</div>';
-			}
-
-			$render .= '</div>';
-			$render .= '</div>';
-			$render .= '</section>';
-			
-		}
+					<div class="row justify-content-center">
+						<?php
+						while( $posts->have_posts() ):							
+							$posts->the_post();
+							?>
+							<div class="col-lg-4 col-md-6 col-sm-9">
+								<div class="article-item mt-30">
+									<div class="article-top text-center">
+										<a href="<?php echo esc_attr( the_permalink() ); ?>"><h4><?php echo esc_html( the_title() ); ?></h4></a>
+									</div>
+									<div class="article-thumb">
+										<a href="<?php echo esc_attr( the_permalink() ); ?>"><?php echo wp_get_attachment_image( get_post_thumbnail_id(), 'blog-grid', false, array( 'class' => 'img-fluid' ) ); ?></a>
+										<div class="date">
+											<span class="title"><?php echo esc_html( get_the_date( 'd' ) ) ?></span>
+											<span><?php echo esc_html( get_the_date( 'M' ) ) ?></span>
+											<span><?php echo esc_html( get_the_date( 'Y' ) ) ?></span>
+										</div>
+									</div>
+									<div class="article-content pl-25 pr-25 pt-25">
+										<p><?php echo get_the_excerpt() ?></p>
+										<a href="<?php echo esc_attr( the_permalink() ); ?>">Leer más</a>
+									</div>
+								</div>
+							</div>
+							<?php
+						endwhile;
+						?>
+					</div>
+				</div>
+			</section>
+			<?php			
+		endif;
 
 		wp_reset_postdata();
 
-		return $render;
+		return ob_get_clean();
 	}
 
 	public function en_contraste_plugin_render_services( $block_attributes, $block_content ) {
+
+		ob_start();
 
 		$block_title = isset( $block_attributes['title'] ) ? $block_attributes['title'] : 'Nuestros servicios';
 		$block_content = isset( $block_attributes['content'] ) ? $block_attributes['content'] : 'Adquiere la mejor experiencia en foto y video para tus eventos';
@@ -257,42 +259,49 @@ class En_Contraste_Plugin_Admin {
 		);
 		$services = new WP_Query( $args );
 
-		$render = '<section class="service-area pb-100">
+		?>
+		<section class="service-area pb-100">
 			<div class="container">
 				<div class="row justify-content-center">
 					<div class="col-lg-6 col-md-9">
 						<div class="section-title text-center">
-							<h3 class="title">'. esc_html( $block_title ) .'</h3>
-							<p>'. esc_html( $block_content ).'</p>
+							<h3 class="title"><?php echo esc_html( $block_title ); ?></h3>
+							<p><?php echo esc_html( $block_content ); ?></p>
 						</div>
 					</div>
 				</div>
-				<div class="row justify-content-center">';
+				<div class="row justify-content-center">
+					<?php
+					if ( $services->have_posts() ) :
 
-					if ( $services->have_posts() ) {
-
-						/* Start the Loop */
-						while ( $services->have_posts() ) {
+						while ( $services->have_posts() ) :
 							$services->the_post();
+							?>
 
-							$render .= '<div class="col-lg-4 col-md-6 col-sm-8">';
-								$render .= '<div class="service-item-wrap mb-5">';
-									$render .= '<div class="service-meta text-center">';
-										$render .= '<a href="'. esc_html( get_the_permalink() ) .'"><h2 class="title">'. esc_html( get_the_title() ) .'</h2></a>';
-										$render .= '<a href="'. esc_html( get_the_permalink() ) .'" class="service-meta-link">Paquetes</a>';
-									$render .= '</div>';
-									$render .= wp_get_attachment_image( get_post_meta( get_the_ID(), 'services_image_image_id', true ), 'services-grid', false, array( 'class' => 'service-img-grid' ) );
-								$render .= '</div>';
-							$render .= '</div>';
-						}
-					}
-		$render .= '</div>
+							<div class="col-lg-4 col-md-6 col-sm-8">
+								<div class="service-item-wrap mb-5 text-center">
+									<div class="service-meta text-center">
+										<a href="<?php echo esc_html( get_the_permalink() ); ?>"><h2 class="title"><?php echo esc_html( get_the_title() ); ?></h2></a>
+										<a href="<?php echo esc_html( get_the_permalink() ); ?>" class="service-meta-link">Paquetes</a>
+									</div>
+									<?php
+									echo wp_get_attachment_image( get_post_meta( get_the_ID(), 'services_image_image_id', true ), 'services-grid', false, array( 'class' => 'service-img-grid' ) );
+									?>
+								</div>
+							</div>
+							<?php
+						endwhile;
+
+					endif
+					?>
+				</div>
 			</div>
-		</section>';
+		</section>
+		<?php
 
 		wp_reset_postdata();
 
-		return $render;
+		return ob_get_clean();
 	}
 
 	public function en_contraste_plugin_render_portfolio( $block_attributes, $block_content) {
