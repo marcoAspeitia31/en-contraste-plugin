@@ -140,6 +140,7 @@ class En_Contraste_Plugin_Admin {
 
 		$blocks = array(
 			$this->plugin_name . '/about',
+			$this->plugin_name . '/hero',
 		);
 
 		foreach ( $blocks as $block_type ) {
