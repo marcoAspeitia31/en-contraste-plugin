@@ -52,7 +52,7 @@ class En_Contraste_Plugin_Testimonials_Post_Type {
             'filter_items_list'     => __( 'Filter items list', 'en-contraste-plugin' ),
         );
         $rewrite = array(
-            'slug'                  => 'servicios',
+            'slug'                  => 'testimoniales',
         );
         $args = array(
             'label'                 => __( 'Testimonial', 'en-contraste-plugin' ),
