@@ -9,6 +9,8 @@ const Save = ( props ) => {
             content,
             imageURL,
             imageAlt,
+            imageWidth,
+            imageHeight,
             buttonURL,
             buttonText
         }
@@ -37,7 +39,7 @@ const Save = ( props ) => {
                     </div>
                     <div className="col-lg-7">
                         <div className="about-thumb animated wow fadeInRight" data-wow-duration="3000ms" data-wow-delay="0ms">
-                            <img src={ imageURL } alt={ imageAlt } class="img-fluid efp-img"/>
+                            <img src={ imageURL } alt={ imageAlt } width={ imageWidth } height={ imageHeight } class="img-fluid efp-img"/>
                         </div>
                     </div>
                 </div>
