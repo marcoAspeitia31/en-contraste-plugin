@@ -417,7 +417,7 @@ class En_Contraste_Plugin_Admin {
 								<?php echo esc_html( get_post_meta( get_the_ID(), 'testimonials_opinion', true ) ); ?>
 								<div class="info">
 									<?php echo wp_get_attachment_image( get_post_meta( get_the_ID(), 'testimonials_image_id', true ), 'testimonial', false, array( 'class' => 'img-fluid rounded-circle' ) ); ?>
-									<h5 class="title"><?php esc_html( the_title() ); ?></h5>
+									<span class="title"><?php esc_html( the_title() ); ?></span>
 								</div>
 							</div>
 						</div>

@@ -120,7 +120,7 @@ const Edit = props => {
                                                     <p>{ testimonial.cmb2.testimonials_metabox.testimonials_opinion }</p>
                                                     <div className="info">
                                                         <img src={ testimonial.featured_image_src } alt="imagen cliente en contraste fotografía" className="img-fluid rounded-circle" width="60" height="60"/>
-                                                        <h5 className="title">{ testimonial.title.rendered }</h5>
+                                                        <span className="title">{ testimonial.title.rendered }</span>
                                                     </div>
                                                 </div>
                                             </div>
