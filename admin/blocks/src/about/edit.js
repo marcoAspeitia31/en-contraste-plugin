@@ -84,7 +84,7 @@ const Edit = ( props ) => {
                                     value = { content }
                                     onChange = { onChangeContent }
                                 />
-                                <a className="main-btn" href={ buttonURL }>{ buttonText }</a>
+                                <a className="main-btn" aria-label={`${ buttonText }`} href={ buttonURL }>{ buttonText }</a>
                                 <URLInputButton
                                     onChange = { onChangeButtonURL }
                                     url = { buttonURL }

@@ -114,10 +114,10 @@ const Edit = props => {
                                             <div className="col-lg-4 col-md-6 col-sm-8">
                                                 <div className="service-item-wrap mb-5">
                                                     <div className="service-meta text-center">
-                                                        <a href={ service.link }>
+                                                        <a href={ service.link } aria-label={`Learn more in ${ service.title.rendered }`}>
                                                             <h2 className="title">{ service.title.rendered }</h2>
                                                         </a>                                                        
-                                                        <a href={ service.link } className="service-meta-link">Paquetes</a>
+                                                        <a href={ service.link } aria-label={`Ver paquetes de ${ service.title.rendered }`} className="service-meta-link">Paquetes</a>
                                                     </div>
                                                     <img src={ serviceGridImageSrc } alt="" className="service-img-grid img-fluid"/>
                                                 </div>

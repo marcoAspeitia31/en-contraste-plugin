@@ -100,7 +100,7 @@ const Edit = ( props ) => {
                                     value={slogan}
                                     onChange={onChangeSlogan}
                                 />
-                                <a className="main-btn main-btn-2 animated wow fadeInDown" href={buttonURL}>{buttonText}</a>
+                                <a className="main-btn main-btn-2 animated wow fadeInDown" aria-label={`${ buttonText }`} href={buttonURL}>{buttonText}</a>
                                 <URLInputButton
                                     onChange={ onChangeButtonURL }
                                     url={ buttonURL }

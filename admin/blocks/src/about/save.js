@@ -32,7 +32,7 @@ const Save = ( props ) => {
                                 tagName='p'
                                 value={ content }
                             />
-                            <a className="main-btn" href={ buttonURL }>{ buttonText }</a>
+                            <a className="main-btn" aria-label={`${ buttonText }`} href={ buttonURL }>{ buttonText }</a>
                         </div>
                     </div>
                     <div className="col-lg-7">

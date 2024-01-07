@@ -217,10 +217,10 @@ class En_Contraste_Plugin_Admin {
 							<div class="col-lg-4 col-md-6 col-sm-9">
 								<div class="article-item mt-30">
 									<div class="article-top text-center">
-										<a href="<?php echo esc_attr( the_permalink() ); ?>"><h4><?php echo esc_html( the_title() ); ?></h4></a>
+										<a href="<?php echo esc_attr( the_permalink() ); ?>" aria-label="Visitar <?php echo esc_attr( the_title() ); ?>"><h4><?php echo esc_html( the_title() ); ?></h4></a>
 									</div>
 									<div class="article-thumb">
-										<a href="<?php echo esc_attr( the_permalink() ); ?>"><?php echo wp_get_attachment_image( get_post_thumbnail_id(), 'blog-grid', false, array( 'class' => 'img-fluid' ) ); ?></a>
+										<a href="<?php echo esc_attr( the_permalink() ); ?>" aria-label="Visitar <?php echo esc_attr( the_title() ); ?>"><?php echo wp_get_attachment_image( get_post_thumbnail_id(), 'blog-grid', false, array( 'class' => 'img-fluid' ) ); ?></a>
 										<div class="date">
 											<span class="title"><?php echo esc_html( get_the_date( 'd' ) ) ?></span>
 											<span><?php echo esc_html( get_the_date( 'M' ) ) ?></span>
@@ -229,7 +229,7 @@ class En_Contraste_Plugin_Admin {
 									</div>
 									<div class="article-content pl-25 pr-25 pt-25">
 										<p><?php echo get_the_excerpt() ?></p>
-										<a href="<?php echo esc_attr( the_permalink() ); ?>">Leer más</a>
+										<a href="<?php echo esc_attr( the_permalink() ); ?>" aria-label="Leer más <?php echo esc_attr( the_title() ); ?>">Leer más</a>
 									</div>
 								</div>
 							</div>
@@ -282,8 +282,8 @@ class En_Contraste_Plugin_Admin {
 							<div class="col-lg-4 col-md-6 col-sm-8">
 								<div class="service-item-wrap mb-5 text-center">
 									<div class="service-meta text-center">
-										<a href="<?php echo esc_html( get_the_permalink() ); ?>"><h2 class="title"><?php echo esc_html( get_the_title() ); ?></h2></a>
-										<a href="<?php echo esc_html( get_the_permalink() ); ?>" class="service-meta-link">Paquetes</a>
+										<a href="<?php echo esc_html( get_the_permalink() ); ?>" aria-label="Visitar <?php echo esc_attr( the_title() ); ?>"><h2 class="title"><?php echo esc_html( get_the_title() ); ?></h2></a>
+										<a href="<?php echo esc_html( get_the_permalink() ); ?>" class="service-meta-link" aria-label="Paquetes de <?php echo esc_attr( the_title() ); ?>">Paquetes</a>
 									</div>
 									<?php
 									echo wp_get_attachment_image( get_post_meta( get_the_ID(), 'services_image_image_id', true ), 'services-grid', false, array( 'class' => 'service-img-grid' ) );

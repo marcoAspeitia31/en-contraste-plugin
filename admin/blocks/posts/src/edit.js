@@ -124,10 +124,10 @@ const Edit = props => {
                                             <div class="col-lg-4 col-md-6 col-sm-9" key={ post.id }>
                                                 <div class="article-item mt-30">
                                                     <div class="article-top text-center">
-                                                        <a href={ post.link }><h4>{ post.title.rendered }</h4></a>
+                                                        <a href={ post.link } aria-label={`Learn more in ${ post.title.rendered }`}><h4>{ post.title.rendered }</h4></a>
                                                     </div>
                                                     <div class="article-thumb">
-                                                        <a href={ post.link }><img src={ post.featured_image_src } alt=""/></a>
+                                                        <a href={ post.link } aria-label={`Learn more in ${ post.title.rendered }`}><img src={ post.featured_image_src } alt=""/></a>
                                                         <div class="date">
                                                             <span class="title">{ day }</span>
                                                             <span>{ month }</span>
@@ -136,7 +136,7 @@ const Edit = props => {
                                                     </div>
                                                     <div class="article-content pl-25 pr-25 pt-25">
                                                         <p>{ excerptRendered }</p>
-                                                        <a href={ post.link }>Leer más</a>
+                                                        <a href={ post.link } aria-label={`Learn more in ${ post.title.rendered }`}>Leer más</a>
                                                     </div>
                                                 </div>
                                             </div>

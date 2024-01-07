@@ -44,7 +44,7 @@ const Save = ( props ) => {
                                 tagName='span'
                                 value={slogan}
                             />
-                            <a className="main-btn main-btn-2 animated wow fadeInDown" href={buttonURL}>{buttonText}</a>
+                            <a className="main-btn main-btn-2 animated wow fadeInDown" aria-label={`${ buttonText }`} href={buttonURL}>{buttonText}</a>
                         </div>
                     </div>
                 </div>
