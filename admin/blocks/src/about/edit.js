@@ -18,6 +18,8 @@ const Edit = ( props ) => {
             content,
             imageURL,
             imageAlt,
+            imageWidth,
+            imageHeight,
             buttonURL,
             buttonText
         },
@@ -31,12 +33,16 @@ const Edit = ( props ) => {
     const onSelectImage = newImage => {
         if ( newImage.sizes.about ) {
             setAttributes({
-                imageURL: newImage.sizes.about.url,                
+                imageURL: newImage.sizes.about.url,
+                imageWidth: newImage.sizes.about.width,
+                imageHeight: newImage.sizes.about.height,
                 imageAlt: newImage.alt
             })
         } else {
             setAttributes({
                 imageURL: newImage.sizes.full.url,
+                imageWidth: newImage.sizes.full.width,
+                imageHeight: newImage.sizes.full.height,
                 imageAlt: newImage.alt
             })
         }
@@ -93,7 +99,7 @@ const Edit = ( props ) => {
                         </div>
                         <div className="col-lg-7">
                             <div className="about-thumb animated wow fadeInRight" data-wow-duration="3000ms" data-wow-delay="0ms">
-                                <img src={ imageURL } alt={ imageAlt } class="img-fluid efp-img"/>
+                                <img src={ imageURL } alt={ imageAlt } width={imageWidth} height={imageHeight} class="img-fluid efp-img"/>
                                 <MediaUpload
                                     type = 'image'
                                     onSelect = { onSelectImage }
