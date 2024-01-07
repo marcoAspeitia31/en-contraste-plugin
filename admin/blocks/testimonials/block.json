@@ -1,0 +1,30 @@
+{
+    "apiVersion": 2,
+    "name": "en-contraste-plugin/testimonials",
+    "title": "Testimoniales",
+    "category": "widgets",
+    "icon": "admin-post",
+    "description": "Slider de los últimos testimoniales",
+    "keywords": ["testimoniales", "en contraste"],
+    "version": "1.0.0",
+    "textdomain": "en-contraste-plugin",
+    "attributes": {
+        "title": {
+            "type": "string"
+        },
+        "content": {
+            "type": "string"
+        },
+        "per_page": {
+            "type": "integer"
+        },
+        "align": {
+            "type": "string",
+            "default": "full"
+        }
+    },
+    "supports" : {
+        "align": ["full"]
+    },
+    "editorScript": "file:./build/index.js"
+}

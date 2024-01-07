@@ -1,0 +1,38 @@
+{
+    "apiVersion": 2,
+    "name": "en-contraste-plugin/portfolio",
+    "title": "Portafolio recientes",
+    "category": "widgets",
+    "icon": "admin-post",
+    "description": "Lista el portafolio de la página",
+    "keywords": ["portafolio", "en contraste"],
+    "version": "1.0.0",
+    "textdomain": "en-contraste-plugin",
+    "attributes": {
+        "title": {
+            "type": "string"
+        },
+        "content": {
+            "type": "string"
+        },
+        "pageOnFrontId": {
+            "type": "integer"
+        },
+        "portfolioImages": {
+            "type": "array",
+            "default": []
+        },
+        "portfolioSliderClass": {
+            "type": "string",
+            "default": "row"
+        },
+        "align": {
+            "type": "string",
+            "default": "full"
+        }        
+    },
+    "supports" : {
+        "align": ["full"]
+    },
+    "editorScript": "file:./build/index.js"
+}

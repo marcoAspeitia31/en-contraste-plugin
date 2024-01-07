@@ -77,6 +77,9 @@ class En_Contraste_Plugin {
 		$this->load_dependencies();
 		$this->set_locale();
 		$this->define_admin_hooks();
+		$this->define_services_hooks();
+		$this->define_testimonials_hooks();
+		$this->define_front_page_hooks();
 		$this->define_public_hooks();
 
 	}
@@ -110,11 +113,29 @@ class En_Contraste_Plugin {
 		 * of the plugin.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-en-contraste-plugin-i18n.php';
+		
+		/**
+		 * The file responsible to add CMB2 functionality
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/cmb2-functions.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-en-contraste-plugin-admin.php';
+
+		/**
+		 * The class responsible for adding services custom post type
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-post-types/class-en-contraste-plugin-services-post-type.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-post-types/class-en-contraste-plugin-testimonials-post-type.php';
+
+		/**
+		 * The classes responsible for adding custom metaboxes via CMB2
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-fields/class-en-contraste-plugin-services-fields.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-fields/class-en-contraste-plugin-testimonials-fields.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-fields/class-en-contraste-plugin-front-page-fields.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
@@ -156,6 +177,62 @@ class En_Contraste_Plugin {
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+		$this->loader->add_action( 'rest_api_init', $plugin_admin, 'en_contraste_plugin_resgister_rest_fields' );
+		$this->loader->add_action( 'init', $plugin_admin, 'en_contraste_plugin_register_blocks' );
+		$this->loader->add_action( 'enqueue_block_editor_assets', $plugin_admin, 'en_contraste_plugin_blocks_styles' );
+
+	}
+
+	/**
+	 * Register all of the hooks related to services custom post type functionality
+	 * of the plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 */
+	private function define_services_hooks() {
+
+		$plugin_services_post_type = new En_Contraste_Plugin_Services_Post_Type();
+
+		$this->loader->add_action( 'init', $plugin_services_post_type, 'services_post_type', 0 );
+
+		$plugin_services_fields = new En_Contraste_Plugin_Services_Fields();
+
+		$this->loader->add_action( 'cmb2_init', $plugin_services_fields, 'services_image_metabox', 0 );
+
+	}
+
+	/**
+	 * Register all of the hooks related to services custom post type functionality
+	 * of the plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 */
+	private function define_testimonials_hooks() {
+
+		$plugin_testimonials_post_type = new En_Contraste_Plugin_Testimonials_Post_Type();
+
+		$this->loader->add_action( 'init', $plugin_testimonials_post_type, 'testimonials_post_type', 0 );
+
+		$plugin_testimonials_fields = new En_Contraste_Plugin_Testimonials_Fields();
+
+		$this->loader->add_action( 'cmb2_init', $plugin_testimonials_fields, 'testimonials_metabox', 0 );
+
+	}
+
+	/**
+	 * Register all of the hooks related to front_page custom post type functionality
+	 * of the plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 */
+	private function define_front_page_hooks() {
+
+		$plugin_front_page_fields = new En_Contraste_Plugin_Front_Page_Fields();
+
+		$this->loader->add_action( 'cmb2_init', $plugin_front_page_fields, 'front_page_portfolio_metabox', 0 );
 
 	}
 

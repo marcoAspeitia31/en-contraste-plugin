@@ -1,0 +1,40 @@
+{
+  "name": "blocks",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "wp-scripts build",
+    "check-engines": "wp-scripts check-engines",
+    "check-licenses": "wp-scripts check-licenses",
+    "format": "wp-scripts format",
+    "lint:css": "wp-scripts lint-style",
+    "lint:js": "wp-scripts lint-js",
+    "lint:md:docs": "wp-scripts lint-md-docs",
+    "lint:pkg-json": "wp-scripts lint-pkg-json",
+    "packages-update": "wp-scripts packages-update",
+    "plugin-zip": "wp-scripts plugin-zip",
+    "start": "wp-scripts start",
+    "start:news": "wp-scripts start ./posts/src/index.js --output-path=./posts/build",
+    "build:news": "wp-scripts build ./posts/src/index.js --output-path=./posts/build",
+    "start:services": "wp-scripts start ./services/src/index.js --output-path=./services/build",
+    "build:services": "wp-scripts build ./services/src/index.js --output-path=./services/build",
+    "start:portfolio": "wp-scripts start ./portfolio/src/index.js --output-path=./portfolio/build",
+    "build:portfolio": "wp-scripts build ./portfolio/src/index.js --output-path=./portfolio/build",
+    "start:testimonials": "wp-scripts start ./testimonials/src/index.js --output-path=./testimonials/build",
+    "build:testimonials": "wp-scripts build ./testimonials/src/index.js --output-path=./testimonials/build",
+    "test:e2e": "wp-scripts test-e2e",
+    "test:unit": "wp-scripts test-unit-js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@wordpress/scripts": "^26.19.0"
+  },
+  "dependencies": {
+    "@wordpress/core-data": "^6.25.0",
+    "@wordpress/dom-ready": "^3.48.0",
+    "moment": "^2.29.4"
+  }
+}
