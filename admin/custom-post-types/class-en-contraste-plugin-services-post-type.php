@@ -64,7 +64,7 @@ class En_Contraste_Plugin_Services_Post_Type {
             'show_ui'               => true,
             'show_in_menu'          => true,
             'menu_position'         => 5,
-            'menu_icon'             => 'dashicons-clipboard',
+            'menu_icon'             => 'dashicons-megaphone',
             'show_in_admin_bar'     => true,
             'show_in_nav_menus'     => true,
             'can_export'            => true,
