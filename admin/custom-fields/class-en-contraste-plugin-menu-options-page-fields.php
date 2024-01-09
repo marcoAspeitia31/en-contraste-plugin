@@ -36,7 +36,7 @@ class En_Contraste_Plugin_Menu_Options_Page_Fields {
             * Several of these parameters are passed along to add_menu_page()/add_submenu_page().
             */
 
-            'option_key'      => 'dme_theme_options', // The option key and admin menu page slug.
+            'option_key'      => 'efp_theme_options', // The option key and admin menu page slug.
             'icon_url'        => plugin_dir_url( __DIR__ ) . 'img/logo-cideapps.png', // Menu icon. Only applicable if 'parent_slug' is left empty.
             'menu_title'              => esc_html__( 'Theme Options', 'en-contraste-plugin' ), // Falls back to 'title' (above).
             // 'parent_slug'             => 'themes.php', // Make options page a submenu item of the themes menu.
@@ -110,6 +110,12 @@ class En_Contraste_Plugin_Menu_Options_Page_Fields {
             'type' => 'text_url',
             'protocols' => array( 'https', 'http' ),
         ) );
+        $efp_options->add_field( array(
+            'name' => esc_html__( 'Google API Key', 'en-contraste-plugin' ),
+            'desc' => esc_html__( 'field description (optional)', 'en-contraste-plugin' ),
+            'id'   => 'google_api_key',
+            'type' => 'text',
+        ) );
 
         /**
          * Contact information
@@ -126,7 +132,7 @@ class En_Contraste_Plugin_Menu_Options_Page_Fields {
             'name' => esc_html__( 'Business address', 'en-contraste-plugin' ),
             'desc' => esc_html__( 'field description (optional)', 'en-contraste-plugin' ),
             'id'   => 'business_address',
-            'type' => 'text',
+            'type' => 'textarea_small',
         ) );
 
         $efp_options->add_field( array(
@@ -144,6 +150,14 @@ class En_Contraste_Plugin_Menu_Options_Page_Fields {
             'desc' => esc_html__( 'field description (optional)', 'en-contraste-plugin' ),
             'id'   => 'contact_email',
             'type' => 'text_email',
+        ) );
+
+        $efp_options->add_field( array(
+            'name' => 'Location',
+            'desc' => 'Drag the marker to set the exact location',
+            'id' => 'location',
+            'type' => 'pw_map',
+            // 'split_values' => true, // Save latitude and longitude as two separate fields
         ) );
 
         /**

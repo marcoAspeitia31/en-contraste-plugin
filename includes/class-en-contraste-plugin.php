@@ -119,6 +119,7 @@ class En_Contraste_Plugin {
 		 * The file responsible to add CMB2 functionality
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/cmb2-functions.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/cmb_field_map/cmb-field-map.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.

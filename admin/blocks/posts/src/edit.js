@@ -83,11 +83,11 @@ const Edit = props => {
             {
                 posts.length > 0 &&
                 <div { ...blockProps } >
-                    <section class="article-area">
-                        <div class="container">
-                            <div class="row justify-content-center">
-                                <div class="col-lg-6 col-md-9">
-                                    <div class="section-title text-center">
+                    <section className="article-area">
+                        <div className="container">
+                            <div className="row justify-content-center">
+                                <div className="col-lg-6 col-md-9">
+                                    <div className="section-title text-center">
                                         <RichText
                                             tagName='h2'
                                             className='title'
@@ -104,7 +104,7 @@ const Edit = props => {
                                     </div>
                                 </div>
                             </div>
-                            <div class="row justify-content-center">
+                            <div className="row justify-content-center">
                                 {
                                     posts.map( ( post ) => {
                                         
@@ -121,20 +121,20 @@ const Edit = props => {
                                         }
 
                                         return(
-                                            <div class="col-lg-4 col-md-6 col-sm-9" key={ post.id }>
-                                                <div class="article-item mt-30">
-                                                    <div class="article-top text-center">
+                                            <div className="col-lg-4 col-md-6 col-sm-9" key={ post.id }>
+                                                <div className="article-item mt-30">
+                                                    <div className="article-top text-center">
                                                         <a href={ post.link } aria-label={`Learn more in ${ post.title.rendered }`}><h4>{ post.title.rendered }</h4></a>
                                                     </div>
-                                                    <div class="article-thumb">
+                                                    <div className="article-thumb">
                                                         <a href={ post.link } aria-label={`Learn more in ${ post.title.rendered }`}><img src={ post.featured_image_src } alt=""/></a>
-                                                        <div class="date">
-                                                            <span class="title">{ day }</span>
+                                                        <div className="date">
+                                                            <span className="title">{ day }</span>
                                                             <span>{ month }</span>
                                                             <span>{ year }</span>
                                                         </div>
                                                     </div>
-                                                    <div class="article-content pl-25 pr-25 pt-25">
+                                                    <div className="article-content pl-25 pr-25 pt-25">
                                                         <p>{ excerptRendered }</p>
                                                         <a href={ post.link } aria-label={`Learn more in ${ post.title.rendered }`}>Leer más</a>
                                                     </div>

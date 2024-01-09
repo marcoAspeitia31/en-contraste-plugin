@@ -46,16 +46,16 @@ registerBlockType( 'en-contraste-plugin/about', {
             attribute: 'alt'
         },
         imageWidth: {
-            type: 'integer',
+            type: 'string',
             selector: 'img.efp-img',
             source: 'attribute',
-            attribute: 'alt'
+            attribute: 'width'
         },
         imageHeight: {
-            type: 'integer',
+            type: 'string',
             selector: 'img.efp-img',
             source: 'attribute',
-            attribute: 'alt'
+            attribute: 'height'
         },
         buttonURL: {
             type: 'string',
