@@ -236,6 +236,7 @@ class En_Contraste_Plugin {
 		$plugin_options_menu_page = new En_Contraste_Plugin_Menu_Options_Page_Fields();
 
 		$this->loader->add_action( 'cmb2_admin_init', $plugin_options_menu_page, 'menu_page_portfolio_metabox', 0 );
+		$this->loader->add_action( 'updated_option', $plugin_options_menu_page,'geocode_business_address', 10, 3 );
 
 	}
 

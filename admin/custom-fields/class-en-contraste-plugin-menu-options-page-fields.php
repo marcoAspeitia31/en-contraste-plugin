@@ -63,6 +63,7 @@ class En_Contraste_Plugin_Menu_Options_Page_Fields {
             'type' => 'title',
         ) );
 
+        // Menu logo
         $efp_options->add_field( array(
             'name' => esc_html__( 'Menu logo', 'en-contraste-plugin' ),
             'desc' => esc_html__( 'Upload an image or enter a URL.', 'en-contraste-plugin' ),
@@ -78,6 +79,7 @@ class En_Contraste_Plugin_Menu_Options_Page_Fields {
             )
         ) );
 
+        // Footer logo
         $efp_options->add_field( array(
             'name' => esc_html__( 'Footer Logo', 'en-contraste-plugin' ),
             'desc' => esc_html__( 'Upload an image or enter a URL.', 'en-contraste-plugin' ),
@@ -93,16 +95,7 @@ class En_Contraste_Plugin_Menu_Options_Page_Fields {
             )
         ) );
 
-        /**
-         * CTA
-         */
-        $efp_options->add_field( array(
-            'name' => esc_html__( 'CTA', 'en-contraste-plugin' ),
-            'desc' => esc_html__( 'This is a title description', 'en-contraste-plugin' ),
-            'id'   => 'cta_title',
-            'type' => 'title',
-        ) );
-
+        // CTA url
         $efp_options->add_field( array(
             'name' => esc_html__( 'Menu call to action', 'en-contraste-plugin' ),
             'desc' => esc_html__( 'field description (optional)', 'en-contraste-plugin' ),
@@ -110,17 +103,31 @@ class En_Contraste_Plugin_Menu_Options_Page_Fields {
             'type' => 'text_url',
             'protocols' => array( 'https', 'http' ),
         ) );
+
+        /**
+         * Settings
+         */
+        $efp_options->add_field( array(
+            'name' => esc_html__( 'Settings', 'en-contraste-plugin' ),
+            'desc' => esc_html__( 'This is a title description', 'en-contraste-plugin' ),
+            'id'   => 'cta_title',
+            'type' => 'title',
+        ) );
+
+        //Google API key
         $efp_options->add_field( array(
             'name' => esc_html__( 'Google API Key', 'en-contraste-plugin' ),
             'desc' => esc_html__( 'field description (optional)', 'en-contraste-plugin' ),
             'id'   => 'google_api_key',
             'type' => 'text',
+            'attributes' => array(
+                'type' => 'password',
+            ),
         ) );
 
         /**
          * Contact information
          */
-
         $efp_options->add_field( array(
             'name' => esc_html__( 'Contact information', 'en-contraste-plugin' ),
             'desc' => esc_html__( 'This is a title description', 'en-contraste-plugin' ),
@@ -128,13 +135,7 @@ class En_Contraste_Plugin_Menu_Options_Page_Fields {
             'type' => 'title',
         ) );
 
-        $efp_options->add_field( array(
-            'name' => esc_html__( 'Business address', 'en-contraste-plugin' ),
-            'desc' => esc_html__( 'field description (optional)', 'en-contraste-plugin' ),
-            'id'   => 'business_address',
-            'type' => 'textarea_small',
-        ) );
-
+        // Phone
         $efp_options->add_field( array(
             'name' => esc_html__( 'Business phone', 'en-contraste-plugin' ),
             'desc' => esc_html__( 'field description (optional)', 'en-contraste-plugin' ),
@@ -145,6 +146,7 @@ class En_Contraste_Plugin_Menu_Options_Page_Fields {
             ),
         ) );
 
+        // E-mail
         $efp_options->add_field( array(
             'name' => esc_html__( 'Contact e-mail', 'en-contraste-plugin' ),
             'desc' => esc_html__( 'field description (optional)', 'en-contraste-plugin' ),
@@ -152,12 +154,21 @@ class En_Contraste_Plugin_Menu_Options_Page_Fields {
             'type' => 'text_email',
         ) );
 
+        // Map
         $efp_options->add_field( array(
             'name' => 'Location',
             'desc' => 'Drag the marker to set the exact location',
             'id' => 'location',
             'type' => 'pw_map',
             // 'split_values' => true, // Save latitude and longitude as two separate fields
+        ) );
+
+        // Business address
+        $efp_options->add_field( array(
+            'name' => esc_html__( 'Business address', 'en-contraste-plugin' ),
+            'desc' => esc_html__( 'field description (optional)', 'en-contraste-plugin' ),
+            'id'   => 'business_address',
+            'type' => 'textarea_small',
         ) );
 
         /**
@@ -170,6 +181,7 @@ class En_Contraste_Plugin_Menu_Options_Page_Fields {
             'type' => 'title',
         ) );
 
+        // Facebook
         $efp_options->add_field( array(
             'name' => esc_html__( 'Facebook URL', 'en-contraste-plugin' ),
             'desc' => esc_html__( 'field description (optional)', 'en-contraste-plugin' ),
@@ -178,6 +190,7 @@ class En_Contraste_Plugin_Menu_Options_Page_Fields {
             'protocols' => array( 'https' ),
         ) );
 
+        // Instagram
         $efp_options->add_field( array(
             'name' => esc_html__( 'Instagram URL', 'en-contraste-plugin' ),
             'desc' => esc_html__( 'field description (optional)', 'en-contraste-plugin' ),
@@ -186,6 +199,7 @@ class En_Contraste_Plugin_Menu_Options_Page_Fields {
             'protocols' => array( 'https' ),
         ) );
 
+        // Youtube
         $efp_options->add_field( array(
             'name' => esc_html__( 'Youtube URL', 'en-contraste-plugin' ),
             'desc' => esc_html__( 'field description (optional)', 'en-contraste-plugin' ),
@@ -194,6 +208,7 @@ class En_Contraste_Plugin_Menu_Options_Page_Fields {
             'protocols' => array( 'https' ),
         ) );
 
+        // Tiktok
         $efp_options->add_field( array(
             'name' => esc_html__( 'Tik tok URL', 'en-contraste-plugin' ),
             'desc' => esc_html__( 'field description (optional)', 'en-contraste-plugin' ),
@@ -201,10 +216,41 @@ class En_Contraste_Plugin_Menu_Options_Page_Fields {
             'type' => 'text_url',
             'protocols' => array( 'https' ),
         ) );
-
-
-
         
+    }
+
+    function geocode_business_address( $option, $old_value, $value ) {
+
+        if( $option == 'efp_theme_options' ) {
+
+            $plugin_theme_options = get_option( $option );
+
+            if( ! empty( $plugin_theme_options['google_api_key'] ) ) {
+
+                $google_api_key = esc_html( $plugin_theme_options['google_api_key'] );
+
+            }
+
+            if( $plugin_theme_options['location'] && isset( $google_api_key ) ) {
+
+                var_dump( $plugin_theme_options['location'] );
+
+                $location = $plugin_theme_options['location'];
+
+                $url_maps = "https://maps.googleapis.com/maps/api/geocode/json?latlng=".$location['latitude'].",".$location['longitude']."&sensor=false&key=".$google_api_key;
+                $json_data = json_decode( @file_get_contents( $url_maps ) );
+
+                $business_address = array(
+                    'business_address' => $json_data->results[0]->formatted_address
+                );
+
+                $new_value = array_merge( $plugin_theme_options, $business_address );
+
+                update_option( $option, $new_value );
+            }
+
+        }
+
     }
 
 }
