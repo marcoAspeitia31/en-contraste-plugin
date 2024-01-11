@@ -80,6 +80,7 @@ class En_Contraste_Plugin {
 		$this->define_services_hooks();
 		$this->define_testimonials_hooks();
 		$this->define_front_page_hooks();
+		$this->define_options_menu_page_hooks();
 		$this->define_public_hooks();
 
 	}
@@ -118,6 +119,7 @@ class En_Contraste_Plugin {
 		 * The file responsible to add CMB2 functionality
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/cmb2-functions.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/cmb_field_map/cmb-field-map.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
@@ -136,6 +138,7 @@ class En_Contraste_Plugin {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-fields/class-en-contraste-plugin-services-fields.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-fields/class-en-contraste-plugin-testimonials-fields.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-fields/class-en-contraste-plugin-front-page-fields.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-fields/class-en-contraste-plugin-menu-options-page-fields.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
@@ -218,6 +221,22 @@ class En_Contraste_Plugin {
 		$plugin_testimonials_fields = new En_Contraste_Plugin_Testimonials_Fields();
 
 		$this->loader->add_action( 'cmb2_init', $plugin_testimonials_fields, 'testimonials_metabox', 0 );
+
+	}
+
+	/**
+	 * Register all of the hooks related to plugin options page
+	 * of the plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 */
+	private function define_options_menu_page_hooks() {
+
+		$plugin_options_menu_page = new En_Contraste_Plugin_Menu_Options_Page_Fields();
+
+		$this->loader->add_action( 'cmb2_admin_init', $plugin_options_menu_page, 'menu_page_portfolio_metabox', 0 );
+		$this->loader->add_action( 'updated_option', $plugin_options_menu_page,'geocode_business_address', 10, 3 );
 
 	}
 

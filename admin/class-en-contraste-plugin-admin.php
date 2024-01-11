@@ -120,6 +120,12 @@ class En_Contraste_Plugin_Admin {
 
 	}
 
+	/**
+	 * Register the Gutenberg blocks styles for the admin area.
+	 *
+	 * @since    1.0.0
+	 * @link	 https://developer.wordpress.org/reference/functions/register_block_type/
+	 */
 	public function en_contraste_plugin_blocks_styles() {
 		wp_enqueue_style( 'bootstrap', plugin_dir_url( __FILE__ ) . 'css/bootstrap.min.css', array(), '4.5.0' );
 		wp_enqueue_style( 'font-awesome', plugin_dir_url( __FILE__ ) . 'css/font-awesome.min.css', array(), '5.8.0' );

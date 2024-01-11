@@ -31,6 +31,7 @@ const Edit = ( props ) => {
     const onChangeTitle = newTitle => setAttributes( { title: newTitle } )
     const onChangeContent = newContent => setAttributes( { content: newContent } )
     const onSelectImage = newImage => {
+        console.log(newImage)
         if ( newImage.sizes.about ) {
             setAttributes({
                 imageURL: newImage.sizes.about.url,
@@ -99,7 +100,7 @@ const Edit = ( props ) => {
                         </div>
                         <div className="col-lg-7">
                             <div className="about-thumb animated wow fadeInRight" data-wow-duration="3000ms" data-wow-delay="0ms">
-                                <img src={ imageURL } alt={ imageAlt } width={imageWidth} height={imageHeight} class="img-fluid efp-img"/>
+                                <img src={ imageURL } alt={ imageAlt } width={ imageWidth } height={ imageHeight } className="img-fluid efp-img"/>
                                 <MediaUpload
                                     type = 'image'
                                     onSelect = { onSelectImage }

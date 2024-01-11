@@ -15,6 +15,7 @@ const Save = ( props ) => {
             buttonText
         }
     } = props
+
     return(
         <section className="about-us-area pb-100 pt-100">
             <div className="container">
@@ -39,7 +40,7 @@ const Save = ( props ) => {
                     </div>
                     <div className="col-lg-7">
                         <div className="about-thumb animated wow fadeInRight" data-wow-duration="3000ms" data-wow-delay="0ms">
-                            <img src={ imageURL } alt={ imageAlt } width={ imageWidth } height={ imageHeight } class="img-fluid efp-img"/>
+                            <img src={ imageURL } alt={ imageAlt } width={ imageWidth } height={ imageHeight } className="img-fluid efp-img"/>
                         </div>
                     </div>
                 </div>
