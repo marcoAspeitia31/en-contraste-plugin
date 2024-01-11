@@ -233,8 +233,6 @@ class En_Contraste_Plugin_Menu_Options_Page_Fields {
 
             if( $plugin_theme_options['location'] && isset( $google_api_key ) ) {
 
-                var_dump( $plugin_theme_options['location'] );
-
                 $location = $plugin_theme_options['location'];
 
                 $url_maps = "https://maps.googleapis.com/maps/api/geocode/json?latlng=".$location['latitude'].",".$location['longitude']."&sensor=false&key=".$google_api_key;
